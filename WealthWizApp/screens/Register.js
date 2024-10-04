@@ -1,154 +1,118 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, Pressable, Text, View, StatusBar } from "react-native";
+import {
+  StyleSheet,
+  Pressable,
+  Text,
+  View,
+  ImageBackground,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import NavBar1 from "../components/NavBar1";
 import { FontFamily, Color, FontSize, Border, Padding } from "../GlobalStyles";
 
 const Register = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.register}>
       <Image
-        style={styles.registerChild}
+        style={styles.greencircle}
         contentFit="cover"
-        source={require("../assets/ellipse-13.png")}
+        source={require("../assets/ellipse-1.png")}
       />
-      <Pressable style={[styles.login, styles.loginFlexBox]}>
-        <View style={styles.loginFlexBox}>
+      <ImageBackground
+        style={styles.bankIcon}
+        resizeMode="cover"
+        source={require("../assets/bank1.png")}
+      />
+      <View style={styles.profileContainer}>
+        <View>
+          <Text style={styles.createYourProfile}>
+            Create Your Profile
+          </Text>
+          <Text style={styles.now}>Now!</Text>
+          <Text style={styles.createAProfile}>
+            Create a profile to save your progress and begin learning for free today!
+          </Text>
+        </View>
+        <Pressable
+          style={styles.login}
+          onPress={() => navigation.navigate("Register2")}
+        >
           <Text style={[styles.createNewAccount, styles.createTypo]}>
             Create New Account
           </Text>
-        </View>
-      </Pressable>
-      <View style={styles.createProfile}>
-        <View style={[styles.headerRegister, styles.headerRegisterPosition]}>
-          <Text style={[styles.createYourProfile, styles.nowClr]}>
-            Create Your Profile
-          </Text>
-          <Text style={[styles.now, styles.nowTypo]}>Now!</Text>
-          <Text style={[styles.createAProfile, styles.nowTypo]}>
-            Create a profile to save your learning progress and keep learning
-            for free!
-          </Text>
-        </View>
+        </Pressable>
       </View>
-      <StatusBar style={styles.loginPosition} translucent={true} />
-      <Image
-        style={[styles.bank1Icon, styles.loginPosition]}
-        contentFit="cover"
-        source={require("../assets/bank1.png")}
-      />
+      <NavBar1/>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  loginFlexBox: {
+  register: {
+    backgroundColor: Color.black0,
+    flex: 1,
+    width: "100%",
+    overflow: "hidden",
+    justifyContent: "center",
     alignItems: "center",
-    flexDirection: "row",
   },
-  createTypo: {
-    textAlign: "center",
-    fontFamily: FontFamily.extraLargeTextRegular,
-  },
-  headerRegisterPosition: {
-    width: 309,
-    left: 0,
-    top: 0,
+  greencircle: {
     position: "absolute",
+    width: 700,
+    height: 700,
+    top: -210,
+    right: -200,
   },
-  nowClr: {
-    color: Color.colorDarkslategray_200,
-    lineHeight: 20,
-    letterSpacing: 0,
-    fontSize: FontSize.size_13xl,
+  bankIcon: {
+    width: 418,
+    height: 400,
+    marginTop: -60,
+    marginLeft: 300,
   },
-  nowTypo: {
+  profileContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 70,
+    paddingHorizontal: 20,
+  },
+  createYourProfile: {
     textAlign: "left",
     fontFamily: FontFamily.extraLargeTextRegular,
-    position: "absolute",
+    fontSize: FontSize.size_13xl,
+    color: Color.colorDarkslategray_200,
   },
-  loginPosition: {
-    left: "50%",
-    top: "50%",
-    position: "absolute",
+  now: {
+    textAlign: "left",
+    fontWeight: "600",
+    fontSize: FontSize.size_13xl,
+    color: Color.colorDarkslategray_200,
+    marginBottom: 20,
   },
-  registerChild: {
-    top: -242,
-    left: 377,
-    width: 264,
-    height: 238,
-    position: "absolute",
-  },
-  createNewAccount: {
-    fontSize: FontSize.extraLargeTextRegular_size,
-    letterSpacing: -1,
-    lineHeight: 26,
-    color: Color.black0,
+  createAProfile: {
+    fontSize: FontSize.mediumTextRegular_size,
+    color: Color.colorDarkgray,
+    textAlign: "left",
+    marginBottom: 30,
+    paddingRight: 80,
+    lineHeight: 20,
   },
   login: {
-    marginTop: 278,
-    marginLeft: -156.5,
     borderRadius: Border.br_21xl,
     backgroundColor: Color.colorSeagreen,
     width: 312,
     height: 58,
     justifyContent: "center",
+    alignItems: "center",
     padding: Padding.p_3xs,
-    left: "50%",
-    top: "50%",
-    position: "absolute",
+    marginTop: 70,
   },
-  createYourProfile: {
-    height: 25,
-    width: 309,
-    left: 0,
-    top: 0,
-    position: "absolute",
+  createNewAccount: {
+    fontSize: FontSize.extraLargeTextRegular_size,
+    color: Color.black0,
     textAlign: "center",
-    fontFamily: FontFamily.extraLargeTextRegular,
-  },
-  now: {
-    top: 37,
-    left: 9,
-    fontWeight: "600",
-    width: 203,
-    height: 27,
-    color: Color.colorDarkslategray_200,
-    lineHeight: 20,
-    letterSpacing: 0,
-    fontSize: FontSize.size_13xl,
-  },
-  createAProfile: {
-    top: 92,
-    left: 13,
-    fontSize: FontSize.mediumTextRegular_size,
-    lineHeight: 20,
-    color: Color.colorDarkgray,
-    width: 286,
-    height: 74,
-  },
-  headerRegister: {
-    height: 166,
-  },
-  createProfile: {
-    top: 504,
-    left: 33,
-    width: 7,
-    height: 166,
-    position: "absolute",
-    overflow: "hidden",
-  },
-  bank1Icon: {
-    marginTop: -377,
-    marginLeft: -70.5,
-    width: 418,
-    height: 400,
-  },
-  register: {
-    backgroundColor: Color.black0,
-    flex: 1,
-    width: "100%",
-    height: 852,
-    overflow: "hidden",
   },
 });
 

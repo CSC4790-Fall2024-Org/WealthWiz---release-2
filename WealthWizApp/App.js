@@ -5,7 +5,6 @@ import { StatusBar } from 'expo-status-bar';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import StartScreenNewUser from "./screens/StartScreenNewUser";
-import Register1 from "./screens/Register1";
 import LoginScreen from "./screens/LoginScreen";
 import Achievements from "./screens/Achievements";
 import Register3 from "./screens/Register3";
@@ -33,7 +32,6 @@ const App = () => {
           >
             <Stack.Screen name="StartScreenNewUser" component={StartScreenNewUser} />
             <Stack.Screen name="Register" component={Register} />
-            <Stack.Screen name="Register1" component={Register1} />
             <Stack.Screen name="Register2" component={Register2} />
             <Stack.Screen name="Register3" component={Register3} />
             <Stack.Screen name="LoginScreen" component={LoginScreen} />

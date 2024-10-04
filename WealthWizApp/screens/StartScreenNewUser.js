@@ -42,7 +42,7 @@ const StartScreen2NewUser = () => {
           onPress={() => navigation.navigate("LoginScreen")}
         >
           <View style={styles.buttonWrapper}>
-            <Text style={[styles.button, styles.buttonTypo]}>Login</Text>
+            <Text style={styles.buttonLogin}>Login</Text>
           </View>
         </Pressable>
         <Pressable
@@ -50,7 +50,7 @@ const StartScreen2NewUser = () => {
           onPress={() => navigation.navigate("Register")}
         >
           <View style={styles.buttonWrapper}>
-            <Text style={[styles.button1, styles.buttonTypo]}>Register</Text>
+            <Text style={styles.buttonRegister}>Register</Text>
           </View>
         </Pressable>
       </View>
@@ -83,37 +83,34 @@ const styles = StyleSheet.create({
     height: 58,
     width: 131,
     borderRadius: Border.br_21xl,
-    marginRight: 30, // Add space to the right of the Login button
+    marginRight: 30,
     backgroundColor: Color.black0,
-    justifyContent: 'center', // Center content vertically
-    alignItems: 'center', // Center content horizontally
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   register: {
-    borderStyle: "solid",
-    borderColor: Color.black0,
-    borderWidth: 2,
     padding: Padding.p_3xs,
     height: 58,
     width: 131,
-    marginLeft: 30, // Add space to the right of the Login button
+    marginLeft: 30,
     borderRadius: Border.br_21xl,
-    justifyContent: 'center', // Center content vertically
-    alignItems: 'center', // Center content horizontally
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderStyle: "solid",
+    borderColor: Color.black0,
+    borderWidth: 2,
   },
-  buttonTypo: {
-    lineHeight: 26,
-    letterSpacing: -1,
+  buttonLogin: {
     fontSize: FontSize.extraLargeTextRegular_size,
     textAlign: "center",
     fontFamily: FontFamily.extraLargeTextRegular,
-  },
-  button: {
     color: Color.colorSeagreen,
-    textAlign: "center",
   },
-  button1: {
-    color: Color.black0,
+  buttonRegister: {
+    fontSize: FontSize.extraLargeTextRegular_size,
     textAlign: "center",
+    fontFamily: FontFamily.extraLargeTextRegular,
+    color: Color.black0,
   },
   buttonWrapper: {
     flexDirection: "row",
