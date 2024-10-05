@@ -16,15 +16,15 @@ const Register = () => {
 
   return (
     <View style={styles.register}>
+      <NavBar1/>
       <Image
         style={styles.greencircle}
-        contentFit="cover"
         source={require("../assets/ellipse-1.png")}
       />
       <ImageBackground
         style={styles.bankIcon}
         resizeMode="cover"
-        source={require("../assets/bank1.png")}
+        source={require("../assets/bank-logo.png")}
       />
       <View style={styles.profileContainer}>
         <View>
@@ -45,7 +45,6 @@ const Register = () => {
           </Text>
         </Pressable>
       </View>
-      <NavBar1/>
     </View>
   );
 };
@@ -54,10 +53,10 @@ const styles = StyleSheet.create({
   register: {
     backgroundColor: Color.black0,
     flex: 1,
-    width: "100%",
-    overflow: "hidden",
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "flex-start",
+    paddingTop: 120,
+    overflow: "hidden",
   },
   greencircle: {
     position: "absolute",
@@ -67,15 +66,16 @@ const styles = StyleSheet.create({
     right: -200,
   },
   bankIcon: {
+    position: "absolute",
     width: 418,
     height: 400,
-    marginTop: -60,
-    marginLeft: 300,
+    top: 50,
+    left: 160,
   },
   profileContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 70,
+    marginTop: 400,
     paddingHorizontal: 20,
   },
   createYourProfile: {

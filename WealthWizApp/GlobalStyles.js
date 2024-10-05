@@ -43,6 +43,7 @@ export const Color = {
   colorWhitesmoke: "#ebebeb",
   colorLightseagreen: "#16a085",
   colorSteelblue: "#2980b9",
+  colorBlue: "#0693F1",
   colorLightskyblue: "#9bd2fc",
   colorGainsboro_100: "#e3e3e3",
   colorGainsboro_200: "#e0e0e0",

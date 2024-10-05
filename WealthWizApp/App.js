@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from 'expo-status-bar';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import * as Font from 'expo-font';
+import { useFonts } from 'expo-font';
 
 import StartScreenNewUser from "./screens/StartScreenNewUser";
 import LoginScreen from "./screens/LoginScreen";
@@ -19,17 +21,26 @@ import LottieView from "lottie-react-native";
 
 const Stack = createNativeStackNavigator();
 
-const App = () => {
-  const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
+const loadFonts = async () => {
+  await Font.loadAsync({
+    'lexend-bold': require('./assets/fonts/Lexend Bold.ttf'),
+    'lexend-regular': require('./assets/fonts/Lexend Regular.ttf'),
+    'lexend-medium': require('./assets/fonts/Lexend Medium.ttf'),
+  });
+};
 
+const App = () => {
+  const [fontsLoaded] = useFonts({
+    'lexend-bold': require('./assets/fonts/Lexend Bold.ttf'),
+    'lexend-regular': require('./assets/fonts/Lexend Regular.ttf'),
+    'lexend-medium': require('./assets/fonts/Lexend Medium.ttf'),
+  });
+  const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
   return (
     <>
       <NavigationContainer>
         {hideSplashScreen ? (
-          <Stack.Navigator
-            initialRouteName="StartScreenNewUser"
-            screenOptions={{ headerShown: false }}
-          >
+          <Stack.Navigator initialRouteName="StartScreenNewUser" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="StartScreenNewUser" component={StartScreenNewUser} />
             <Stack.Screen name="Register" component={Register} />
             <Stack.Screen name="Register2" component={Register2} />

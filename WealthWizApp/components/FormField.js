@@ -1,38 +1,37 @@
-import * as React from "react";
-import { StyleSheet, View } from "react-native";
-import FormField1 from "./FormField1";
+import React, { useState } from "react";
+import { TextInput, StyleSheet } from "react-native";
+import { Color } from "../GlobalStyles";
 
-const FormField = () => {
+const FormField = ({ placeholder, value, onChangeText, secureTextEntry = false }) => {
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
-    <View style={styles.formField}>
-      <FormField1
-        stateDefaultPlaceholderText="#000"
-        stateDefaultPlaceholder="Default Label"
-        propTop={95}
-        propFontWeight="700"
-        propFontFamily="Lexend"
-        propFontSize={12}
-        propLeft={20}
-        propWidth={600}
-        propMarginLeft="unset"
-      />
-      <FormField1
-        stateDefaultPlaceholderText="#cbd2da"
-        stateDefaultPlaceholder="Default Label"
-      />
-    </View>
+    <TextInput
+      style={[
+        styles.inputField,
+        { borderColor: isFocused ? "#0693F1" : "#ccc" }
+      ]}
+      placeholder={placeholder}
+      value={value}
+      onChangeText={onChangeText}
+      secureTextEntry={secureTextEntry}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  formField: {
-    borderRadius: 5,
-    borderStyle: "dashed",
-    borderColor: "#9747ff",
-    borderWidth: 1,
-    width: 647,
-    height: 170,
-    overflow: "hidden",
+  inputField: {
+    borderWidth: 2,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    padding: 20,
+    marginBottom: 20,
+    width: '100%',
+    backgroundColor: Color.colorWhite,
+    fontFamily: 'lexend-regular',
+    fontSize: 18,
   },
 });
 

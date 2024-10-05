@@ -3,15 +3,14 @@ import { useEffect } from "react";
 import { Image } from "expo-image";
 import {
   StyleSheet,
-  Text,
   View,
-  Pressable,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Padding, Border, FontSize, FontFamily, Color } from "../GlobalStyles";
 import LottieView from "lottie-react-native";
+import Button from "../components/Button";
+import { Padding, Border, FontSize, FontFamily, Color } from "../GlobalStyles";
 
-const StartScreen2NewUser = () => {
+const StartScreenNewUser = () => {
   const navigation = useNavigation();
   let bankAnimation;
 
@@ -20,7 +19,7 @@ const StartScreen2NewUser = () => {
   }, []);
 
   return (
-    <View style={styles.startScreen2NewUser}>
+    <View style={styles.startScreenNewUser}>
       <Image
         style={styles.vectorIcon}
         contentFit="cover"
@@ -37,29 +36,30 @@ const StartScreen2NewUser = () => {
         loop={false}
       />
       <View style={styles.buttonContainer}>
-        <Pressable
-          style={styles.login}
-          onPress={() => navigation.navigate("LoginScreen")}
-        >
-          <View style={styles.buttonWrapper}>
-            <Text style={styles.buttonLogin}>Login</Text>
-          </View>
-        </Pressable>
-        <Pressable
-          style={styles.register}
-          onPress={() => navigation.navigate("Register")}
-        >
-          <View style={styles.buttonWrapper}>
-            <Text style={styles.buttonRegister}>Register</Text>
-          </View>
-        </Pressable>
+        <Button 
+          title="Register" 
+          onPress={() => navigation.navigate("Register")} 
+          buttonColor="transparent" 
+          textColor={Color.black0} 
+          borderColor={Color.black0}
+          height={65}
+          width={150}
+        />
+        <Button 
+          title="Login" 
+          onPress={() => navigation.navigate("LoginScreen")} 
+          buttonColor={Color.black0} 
+          textColor={Color.colorSeagreen} 
+          height={65}
+          width={150}
+        />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  startScreen2NewUser: {
+  startScreenNewUser: {
     backgroundColor: Color.colorSeagreen,
     flex: 1,
     width: "100%",
@@ -76,46 +76,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  login: {
-    padding: Padding.p_3xs,
-    height: 58,
-    width: 131,
-    borderRadius: Border.br_21xl,
-    marginRight: 30,
-    backgroundColor: Color.black0,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  register: {
-    padding: Padding.p_3xs,
-    height: 58,
-    width: 131,
-    marginLeft: 30,
-    borderRadius: Border.br_21xl,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderStyle: "solid",
-    borderColor: Color.black0,
-    borderWidth: 2,
-  },
-  buttonLogin: {
-    fontSize: FontSize.extraLargeTextRegular_size,
-    textAlign: "center",
-    fontFamily: FontFamily.extraLargeTextRegular,
-    color: Color.colorSeagreen,
-  },
-  buttonRegister: {
-    fontSize: FontSize.extraLargeTextRegular_size,
-    textAlign: "center",
-    fontFamily: FontFamily.extraLargeTextRegular,
-    color: Color.black0,
-  },
-  buttonWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
+    width: '100%', // Ensures full width to space out buttons
+    paddingHorizontal: 40,
   },
 });
 
-export default StartScreen2NewUser;
+export default StartScreenNewUser;

@@ -31,7 +31,6 @@
     "react-native-screens": "^3.31.1",
     "lottie-react-native": "6.7.0"
   },
-
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
