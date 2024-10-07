@@ -8,9 +8,9 @@ import {
   ImageBackground,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import NavBar1 from "../../components/NavBar1";
-import { FontFamily, Color, FontSize, Border, Padding } from "../../GlobalStyles";
-import Button2 from "../../components/Button2";
+import NavBar1 from "../components/NavBar1";
+import { FontFamily, Color, FontSize, Border, Padding } from "../GlobalStyles";
+import Button2 from "../components/Button2";
 
 const Register1 = () => {
   const navigation = useNavigation();
@@ -20,12 +20,12 @@ const Register1 = () => {
       <NavBar1/>
       <Image
         style={styles.greencircle}
-        source={require("../../assets/ellipse-1.png")}
+        source={require("../assets/ellipse-1.png")}
       />
       <ImageBackground
         style={styles.bankIcon}
         resizeMode="cover"
-        source={require("../../assets/bank-logo.png")}
+        source={require("../assets/bank-logo.png")}
       />
       <View style={styles.profileContainer}>
         <View>

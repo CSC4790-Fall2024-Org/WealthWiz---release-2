@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import NavBar1 from "../../components/NavBar1";
-import { Color } from "../../GlobalStyles";
-import FormField from "../../components/FormField";
-import DateField from "../../components/DateField";
-import NumberField from "../../components/NumberField";
-import Button2 from "../../components/Button2";
+import NavBar1 from "../components/NavBar1";
+import { Color } from "../GlobalStyles";
+import FormField from "../components/FormField";
+import DateField from "../components/DateField";
+import NumberField from "../components/NumberField";
+import Button2 from "../components/Button2";
 
 const Register3 = () => {
   const navigation = useNavigation();

@@ -22,13 +22,16 @@ import {
 } from "../GlobalStyles";
 import FormField from "../components/FormField";
 import Button from "../components/Button";
+import { auth } from "../firebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
   const navigation = useNavigation();
   const [googleVisible, setGoogleVisible] = useState(false);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
   
   const openGoogle = useCallback(() => {
     setGoogleVisible(true);
@@ -37,6 +40,18 @@ const Login = () => {
   const closeGoogle = useCallback(() => {
     setGoogleVisible(false);
   }, []);
+
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setModalMessage('Login successful!');
+      setModalVisible(true);
+      navigation.navigate("HomePage");
+    } catch (error) {
+      setModalMessage(`Invalid Username/Password. Please Try Again!`);
+      setModalVisible(true);
+    }
+  };
 
   return (
     <>
@@ -72,7 +87,7 @@ const Login = () => {
         <View style={styles.buttonsContainer}>
           <Button 
             title="Login" 
-            onPress={() => navigation.navigate("HomePage")} 
+            onPress={handleLogin}
             buttonColor={Color.colorSeagreen} 
             textColor={Color.black0} 
             height={65}
@@ -95,6 +110,17 @@ const Login = () => {
         </View>
         <NavBar1 />
       </View>
+
+      <Modal animationType="fade" transparent visible={modalVisible}>
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalMessage}>{modalMessage}</Text>
+            <Pressable onPress={() => setModalVisible(false)}>
+              <Text style={styles.modalButton}>Close</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
 
       <Modal animationType="fade" transparent visible={googleVisible}>
         <View style={styles.googleOverlay}>
@@ -182,6 +208,27 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
+  },
+  modalOverlay: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+  },
+  modalContainer: {
+    width: 300,
+    padding: 20,
+    backgroundColor: Color.white,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalMessage: {
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  modalButton: {
+    color: Color.colorBlue,
+    fontWeight: "bold",
   },
 });
 

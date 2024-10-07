@@ -9,6 +9,11 @@ import {
 } from "react-native";
 import { Image } from "expo-image";
 import { FontFamily, FontSize, Color } from "../GlobalStyles";
+<<<<<<< Updated upstream
+=======
+import Login from "./Login";
+import Registration from "./Register2";
+>>>>>>> Stashed changes
 
 const HomePage = () => {
   return (
