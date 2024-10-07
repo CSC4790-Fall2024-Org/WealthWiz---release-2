@@ -5,27 +5,21 @@ import {
   StyleSheet,
   Pressable,
   View,
-  ImageBackground,
   Modal,
 } from "react-native";
-import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 import FormField from "../components/FormField";
 import { auth } from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import NavBar1 from "../components/NavBar1";
-import {
-  FontSize,
-  FontFamily,
-  Color,
-} from "../GlobalStyles";
+import {Color} from "../GlobalStyles";
 
 const Register2 = () => {
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirm, setConfirm] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
@@ -74,8 +68,8 @@ const Register2 = () => {
         />
         <FormField
           placeholder="Confirm Password*"
-          value={confirm}
-          onChangeText={setConfirm}
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
           secureTextEntry={true}
           width="80%"
         />
