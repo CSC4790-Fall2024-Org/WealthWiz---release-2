@@ -77,7 +77,6 @@ const Register2 = () => {
           title="Next" 
           onPress={() => {
             handleRegistration();
-            navigation.navigate("Register3");
           }}
           buttonColor={Color.colorSeagreen} 
           textColor={Color.black0} 
