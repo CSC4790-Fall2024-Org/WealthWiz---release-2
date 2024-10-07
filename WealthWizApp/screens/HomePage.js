@@ -9,8 +9,11 @@ import {
 } from "react-native";
 import { Image } from "expo-image";
 import { FontFamily, FontSize, Color } from "../GlobalStyles";
+import Login from "./LoginScreen";
+import Registration from "./Register2";
 
 const HomePage = () => {
+  console.log(Registration)
   return (
     <View style={styles.homePage2}>
       <ImageBackground
@@ -28,7 +31,7 @@ const HomePage = () => {
         >
           <Text style={styles.welcomeToWealthwiz1}>{`Welcome to 
 WealthWiz,`}</Text>
-          <Text style={styles.user}>{` <user>!`}</Text>
+          <Text style={styles.user}>{'  Friend!'}</Text>
         </Text>
       </View>
       <ImageBackground

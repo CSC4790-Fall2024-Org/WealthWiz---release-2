@@ -50,7 +50,7 @@ const ProfilePageEdit = () => {
       </Pressable>
       <FormField1
         stateDefaultPlaceholderText="#cbd2da"
-        stateDefaultPlaceholder="Default Label"
+        stateDefaultPlaceholder="Name"
         propTop={672}
         propFontWeight="500"
         propFontFamily="Lexend"
@@ -61,7 +61,7 @@ const ProfilePageEdit = () => {
       />
       <FormField1
         stateDefaultPlaceholderText="#cbd2da"
-        stateDefaultPlaceholder="Default Label"
+        stateDefaultPlaceholder="Email"
         propTop={599}
         propFontWeight="500"
         propFontFamily="Lexend"
@@ -72,7 +72,7 @@ const ProfilePageEdit = () => {
       />
       <FormField1
         stateDefaultPlaceholderText="#cbd2da"
-        stateDefaultPlaceholder="Default Label"
+        stateDefaultPlaceholder="Password"
         propTop={529}
         propFontWeight="500"
         propFontFamily="Lexend"
@@ -83,7 +83,7 @@ const ProfilePageEdit = () => {
       />
       <FormField1
         stateDefaultPlaceholderText="#cbd2da"
-        stateDefaultPlaceholder="Default Label"
+        stateDefaultPlaceholder="Confirm Password"
         propTop={459}
         propFontWeight="500"
         propFontFamily="Lexend"
@@ -94,7 +94,7 @@ const ProfilePageEdit = () => {
       />
       <FormField1
         stateDefaultPlaceholderText="#cbd2da"
-        stateDefaultPlaceholder="Default Label"
+        stateDefaultPlaceholder="Name"
         propTop={389}
         propFontWeight="500"
         propFontFamily="Lexend"
