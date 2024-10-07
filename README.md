@@ -4,6 +4,8 @@ Release 2 Updated - (Revised) Project Abstract on Wiki
 
 To Run WealthWiz on your IOS Mobile Device:
 
+Note: Run on the **main** branch
+
 1) Download the **Expo Go** application from the IOS App Store
 2) Open repository in your prefered IDE.
 3) Double check that you have the expo client installed. Run the following command to install the correct package: **npm install -g expo-cli**
