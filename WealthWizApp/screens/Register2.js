@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button2 from "../components/Button2";
 import {
   Text,
   StyleSheet,
@@ -10,7 +11,6 @@ import {
 import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 import FormField from "../components/FormField";
-import Button from "../components/Button";
 import { auth } from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import NavBar1 from "../components/NavBar1";
@@ -81,7 +81,14 @@ const Register2 = () => {
         />
         <Button2
           title="Next" 
+<<<<<<< Updated upstream
           onPress={handleRegistration}
+=======
+          onPress={() => {
+            handleRegistration();
+            navigation.navigate("Register3");
+          }}
+>>>>>>> Stashed changes
           buttonColor={Color.colorSeagreen} 
           textColor={Color.black0} 
           height={65}
