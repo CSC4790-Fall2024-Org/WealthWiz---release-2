@@ -1,0 +1,19 @@
+{
+  "detectedConfig": {
+    "typescript": false,
+    "naming": "Kebab Case",
+    "unit": "em",
+    "framework": "react",
+    "styling": "CSS Modules"
+  },
+  "locofyConfig": {
+    "project": "Wizbar's Team's Project",
+    "id": "2mvoXONBSqucJoQQ0X99W3OsyYF",
+    "framework": "react-native",
+    "typescript": false,
+    "project_environment": "expo_go",
+    "path": "assets/",
+    "componentsPath": "/Users/finbar/Documents/GitHub/StudentFinanceApp/src/components",
+    "screensPath": "/Users/finbar/Documents/GitHub/StudentFinanceApp/src/pages"
+  }
+}
