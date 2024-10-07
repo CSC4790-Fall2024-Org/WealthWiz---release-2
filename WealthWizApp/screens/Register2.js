@@ -81,14 +81,10 @@ const Register2 = () => {
         />
         <Button2
           title="Next" 
-<<<<<<< Updated upstream
-          onPress={handleRegistration}
-=======
           onPress={() => {
             handleRegistration();
             navigation.navigate("Register3");
           }}
->>>>>>> Stashed changes
           buttonColor={Color.colorSeagreen} 
           textColor={Color.black0} 
           height={65}
