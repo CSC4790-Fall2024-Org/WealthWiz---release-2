@@ -5,23 +5,13 @@ import * as Font from 'expo-font';
 import { useFonts } from 'expo-font';
 
 import StartScreenNewUser from "./screens/StartScreenNewUser";
-<<<<<<< Updated upstream
-import Login from "./screens/Login";
-import Achievements from "./screens/Achievements";
-import Register3 from "./screens/Register/Register3";
-import Register1 from "./screens/Register/Register1";
-import HomePage from "./screens/HomePage";
-=======
 import Register1 from "./screens/Register1";
 import Register2 from "./screens/Register2";
 import Register3 from "./screens/Register3";
 import HomePage from "./screens/HomePage";
-import HomePage1 from "./screens/HomePage1";
 import Login from "./screens/Login";
 import Achievements from "./screens/Achievements";
->>>>>>> Stashed changes
 import ProfilePage from "./screens/ProfilePage";
-import Register2 from "./screens/Register/Register2";
 import ProfilePageEdit from "./screens/ProfilePageEdit";
 
 const Stack = createNativeStackNavigator();
