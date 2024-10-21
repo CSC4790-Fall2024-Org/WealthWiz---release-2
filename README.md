@@ -12,3 +12,5 @@ Note: Run on the **main** branch
 5) Navigate to the "WealthWizApp" folder using cd commands or an imtegrated terminal
 6) Run the command **npx expo start** in terminal
 7) Scan the generated QR code on your camera. This should launch our application in the Expo app. Enjoy!
+
+Enjoy expanding your financial knowledge!
