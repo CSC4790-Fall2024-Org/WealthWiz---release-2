@@ -7,10 +7,8 @@ import {
   Pressable,
   Text,
 } from "react-native";
-import { Image } from "expo-image";
 import { FontFamily, FontSize, Color } from "../GlobalStyles";
-import Login from "./Login";
-import Registration from "./Register2";
+import CourseSelection from "../components/CourseSelection";
 
 const HomePage = () => {
   return (
@@ -28,8 +26,7 @@ const HomePage = () => {
         <Text
           style={[styles.welcomeToWealthwizContainer, styles.chooseACourseTypo]}
         >
-          <Text style={styles.welcomeToWealthwiz1}>{`Welcome to 
-WealthWiz,`}</Text>
+          <Text style={styles.welcomeToWealthwiz1}>{`Welcome to WealthWiz,`}</Text>
           <Text style={styles.user}>{` <user>!`}</Text>
         </Text>
       </View>
@@ -38,6 +35,7 @@ WealthWiz,`}</Text>
         resizeMode="cover"
         source={require("../assets/bank12.png")}
       />
+      <CourseSelection/>
     </View>
   );
 };
