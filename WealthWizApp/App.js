@@ -13,6 +13,7 @@ import Login from "./screens/Login";
 import Achievements from "./screens/Achievements";
 import ProfilePage from "./screens/ProfilePage";
 import ProfilePageEdit from "./screens/ProfilePageEdit";
+import Investing from "./screens/Investing";
 
 const Stack = createNativeStackNavigator();
 
@@ -47,6 +48,7 @@ const App = () => {
             <Stack.Screen name="Achievements" component={Achievements} />
             <Stack.Screen name="ProfilePage" component={ProfilePage} />
             <Stack.Screen name="ProfilePageEdit" component={ProfilePageEdit} />
+            <Stack.Screen name="Investing" component={Investing} />
           </Stack.Navigator>
         ) : null}
       </NavigationContainer>
