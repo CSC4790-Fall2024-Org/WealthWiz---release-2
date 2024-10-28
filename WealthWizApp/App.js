@@ -14,6 +14,8 @@ import Achievements from "./screens/Achievements";
 import ProfilePage from "./screens/ProfilePage";
 import ProfilePageEdit from "./screens/ProfilePageEdit";
 import Investing from "./screens/Investing";
+import Investing from "./screens/C1/";
+//IMPORT THE REST OF THE NEW SCREENS
 
 const Stack = createNativeStackNavigator();
 
