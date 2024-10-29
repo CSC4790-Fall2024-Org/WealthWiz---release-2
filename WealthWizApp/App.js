@@ -1,3 +1,6 @@
+//Change line 47 (InitialRouteName One) to the page that you want to currently work on
+
+
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -14,8 +17,9 @@ import Achievements from "./screens/Achievements";
 import ProfilePage from "./screens/ProfilePage";
 import ProfilePageEdit from "./screens/ProfilePageEdit";
 import Investing from "./screens/Investing";
-import Investing from "./screens/C1/";
-//IMPORT THE REST OF THE NEW SCREENS
+import M1 from "./screens/C1/Mod 1/M1" //First Module Main Screen
+import M2 from "./screens/C1/Mod 2/M2"//Second Module Main Screen
+import M3 from "./screens/C1/Mod 3/M3" //Third Module Main Screen
 
 const Stack = createNativeStackNavigator();
 
@@ -40,7 +44,7 @@ const App = () => {
     <>
       <NavigationContainer>
         {hideSplashScreen ? (
-          <Stack.Navigator initialRouteName="StartScreenNewUser" screenOptions={{ headerShown: false }}>
+          <Stack.Navigator initialRouteName="M1" screenOptions={{ headerShown: false }}> 
             <Stack.Screen name="StartScreenNewUser" component={StartScreenNewUser} />
             <Stack.Screen name="Register1" component={Register1} />
             <Stack.Screen name="Register2" component={Register2} />
@@ -51,6 +55,7 @@ const App = () => {
             <Stack.Screen name="ProfilePage" component={ProfilePage} />
             <Stack.Screen name="ProfilePageEdit" component={ProfilePageEdit} />
             <Stack.Screen name="Investing" component={Investing} />
+            <Stack.Screen name="M1" component={M1} /> 
           </Stack.Navigator>
         ) : null}
       </NavigationContainer>
