@@ -85,11 +85,11 @@ const Login = () => {
         />
 
         <View style={styles.buttonsContainer}>
-          <Button 
-            title="Login" 
+          <Button
+            title="Login"
             onPress={handleLogin}
-            buttonColor={Color.colorSeagreen} 
-            textColor={Color.black0} 
+            buttonColor={Color.colorSeagreen}
+            textColor={Color.black0}
             height={65}
             width={350}
           />

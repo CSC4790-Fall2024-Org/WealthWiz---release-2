@@ -1,79 +1,58 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import React, { useState, useCallback } from "react";
+import {
+  Text,
+  StyleSheet,
+  Pressable,
+  View,
+  ImageBackground,
+  Modal,
+  TextInput,
+} from "react-native";
+import {
+  FontSize,
+  FontFamily,
+  Border,
+  Color,
+  Padding,
+  Gap,
+} from "../../../GlobalStyles";
+import NavBar1 from "../../../components/NavBar1";
 import { useNavigation } from "@react-navigation/native";
-import { ProgressBar } from 'react-native-paper';
 import Button from "../../../components/Button"; //Importing the button
 
-const M1M = () => {
+const M1 = () => {
   const navigation = useNavigation();
-  const [progress, setProgress] = useState(0.5);
-
-  const handleForward = () => {
-    setProgress(progress >= 1 ? 1 : progress + 0.1);
-    navigation.navigate("HomePage");
-  };
-
-  const handleBack = () => {
-    setProgress(progress <= 0 ? 0 : progress - 0.1);
-    navigation.navigate("HomePage");
-  };
-
   return (
-    <View style={styles.container}>
-      {/* Navigation Buttons */}
-      <View style={styles.navContainer}>
-        <Button
-          title="Back"
-          onPress={handleBack}
-          buttonColor="#FFFFFF"
-          textColor="rgba(60, 60, 67, 0.6)"
-          borderColor="rgba(113, 113, 113, 0.3)"
-          height={50}
-          width={120}
-        />
-        <Button
-          title="Forward"
-          onPress={handleForward}
-          buttonColor="#FFFFFF"
-          textColor="#000000"
-          borderColor="#000000"
-          height={50}
-          width={120}
-        />
-      </View>
-
-      {/* Progress Text and Bar */}
-      <Text style={styles.progressText}>Progress</Text>
-      <ProgressBar progress={progress} color="#2E8B57" style={styles.progressBar} />
+    <View style={styles.m1}>
+      <NavBar1/>
+      <Text style={styles.text}>
+        Module 1
+      </Text>
+      <Button
+          title="Next" 
+          onPress={() => navigation.navigate("M2")} //populate m2
+          buttonColor={Color.colorSeagreen} 
+          textColor={Color.black0} 
+          height={65}
+          width={350}
+      />
     </View>
-  );
+  )
 };
 
 const styles = StyleSheet.create({
-  container: {
+  m1: {
+    backgroundColor: Color.black0,
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     paddingTop: 60,
   },
-  navContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "80%",
-    marginBottom: 20,
-    alignItems: "center",
-  },
-  progressText: {
-    fontSize: 20,
-    color: "#333333",
+  text: {
+    fontSize: 30,
+    color: Color.colorDarkslategray_200,
     fontFamily: 'lexend-regular',
-    marginBottom: 10,
-  },
-  progressBar: {
-    width: "80%",
-    height: 10,
-    borderRadius: 5,
+    paddingBottom: 20,
   },
 });
 

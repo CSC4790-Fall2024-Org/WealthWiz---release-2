@@ -20,6 +20,8 @@ import Investing from "./screens/Investing";
 import M1 from "./screens/C1/Mod 1/M1" //First Module Main Screen
 import M2 from "./screens/C1/Mod 2/M2"//Second Module Main Screen
 import M3 from "./screens/C1/Mod 3/M3" //Third Module Main Screen
+import Quiz1 from "./screens/C1/quiz1";
+import CourseHome from "./screens/C1/CourseHome";
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +58,10 @@ const App = () => {
             <Stack.Screen name="ProfilePageEdit" component={ProfilePageEdit} />
             <Stack.Screen name="Investing" component={Investing} />
             <Stack.Screen name="M1" component={M1} /> 
+            <Stack.Screen name="M2" component={M2} /> 
+            <Stack.Screen name="M3" component={M3} /> 
+            <Stack.Screen name="Quiz1" component={Quiz1} /> 
+            <Stack.Screen name="CourseHome" component={CourseHome} /> 
           </Stack.Navigator>
         ) : null}
       </NavigationContainer>

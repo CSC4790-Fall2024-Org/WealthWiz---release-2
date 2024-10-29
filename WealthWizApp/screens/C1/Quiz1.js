@@ -15,22 +15,22 @@ import {
   Color,
   Padding,
   Gap,
-} from "../../../GlobalStyles";
-import NavBar1 from "../../../components/NavBar1";
+} from "../../GlobalStyles";
+import NavBar1 from "../../components/NavBar1";
 import { useNavigation } from "@react-navigation/native";
-import Button from "../../../components/Button"; //Importing the button
+import Button from "../../components/Button"; //Importing the button
 
-const M2 = () => {
+const Quiz1 = () => {
   const navigation = useNavigation();
   return (
-    <View style={styles.m2}>
+    <View style={styles.quiz1}>
       <NavBar1/>
       <Text style={styles.text}>
-        Module 2
+        Quiz 1
       </Text>
       <Button
           title="Next" 
-          onPress={() => navigation.navigate("M3")} //populate m2
+          onPress={() => navigation.navigate("CourseHome")}
           buttonColor={Color.colorSeagreen} 
           textColor={Color.black0} 
           height={65}
@@ -41,7 +41,7 @@ const M2 = () => {
 };
 
 const styles = StyleSheet.create({
-  m2: {
+    quiz1: {
     backgroundColor: Color.black0,
     flex: 1,
     alignItems: 'center',
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default M2;
+export default Quiz1;

@@ -1,37 +1,50 @@
-import React from 'react';
+import React, { useState, useCallback } from "react";
+import {
+  Text,
+  StyleSheet,
+  Pressable,
+  View,
+  ImageBackground,
+  Modal,
+  TextInput,
+} from "react-native";
+import {
+  FontSize,
+  FontFamily,
+  Border,
+  Color,
+  Padding,
+  Gap,
+} from "../../../GlobalStyles";
+import NavBar1 from "../../../components/NavBar1";
+import { useNavigation } from "@react-navigation/native";
 
-const WelcomeToInvesting = () => {
+const CourseHome = () => {
+  const navigation = useNavigation();
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>Welcome to Investing</h1>
-      <p style={styles.description}>
-        Start your journey to financial freedom by learning the basics of investing.
-      </p>
-    </div>
-  );
+    <View style={styles.coursehome}>
+      <NavBar1/>
+      <Text style={styles.text}>
+        Course Home
+      </Text>
+    </View>
+  )
 };
 
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
+const styles = StyleSheet.create({
+  coursehome: {
+    backgroundColor: Color.black0,
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-    backgroundColor: '#f0f4f8',
+    justifyContent: 'flex-start',
+    paddingTop: 60,
   },
-  title: {
-    fontSize: '2.5rem',
-    color: '#333',
-    margin: '0',
+  text: {
+    fontSize: 30,
+    color: Color.colorDarkslategray_200,
+    fontFamily: 'lexend-regular',
+    paddingBottom: 20,
   },
-  description: {
-    fontSize: '1.2rem',
-    color: '#666',
-    marginTop: '1rem',
-    textAlign: 'center',
-    maxWidth: '600px',
-  },
-};
+});
 
-export default WelcomeToInvesting;
+export default CourseHome;
