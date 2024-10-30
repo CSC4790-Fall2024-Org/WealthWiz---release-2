@@ -18,7 +18,7 @@ import {
 } from "../../GlobalStyles";
 import NavBar1 from "../../components/NavBar1";
 import { useNavigation } from "@react-navigation/native";
-import Button from "../../components/Button"; //Importing the button
+import Button from "../../components/Button";
 
 const Quiz1 = () => {
   const navigation = useNavigation();

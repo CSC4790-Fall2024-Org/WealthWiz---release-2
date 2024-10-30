@@ -35,6 +35,7 @@ const M1 = () => {
           textColor={Color.black0} 
           height={65}
           width={350}
+          position = 'fixed'
       />
     </View>
   )
@@ -53,6 +54,10 @@ const styles = StyleSheet.create({
     color: Color.colorDarkslategray_200,
     fontFamily: 'lexend-regular',
     paddingBottom: 20,
+    paddingTop:40,
+    marginLeft: 40,
+    marginRight: 40
+    
   },
 });
 

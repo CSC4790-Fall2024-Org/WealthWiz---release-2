@@ -15,8 +15,8 @@ import {
   Color,
   Padding,
   Gap,
-} from "../../../GlobalStyles";
-import NavBar1 from "../../../components/NavBar1";
+} from "../../GlobalStyles";
+import NavBar1 from "../../components/NavBar1";
 import { useNavigation } from "@react-navigation/native";
 
 const CourseHome = () => {
