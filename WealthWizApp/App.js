@@ -20,7 +20,7 @@ import Investing from "./screens/Investing";
 import M1 from "./screens/C1/Mod 1/M1"; //First Module Main Screen
 import M2 from "./screens/C1/Mod 2/M2";//Second Module Main Screen
 import M3 from "./screens/C1/Mod 3/M3"; //Third Module Main Screen
-import Quiz1 from "./screens/C1/Quiz1";
+import Quiz1 from "./screens/C1/quiz1";
 import CourseHome from "./screens/C1/CourseHome";
 
 const Stack = createNativeStackNavigator();
