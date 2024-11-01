@@ -17,14 +17,13 @@ const M1 = () => {
   const [progress, setProgress] = useState(0); // Initial progress value
 
   const handleOptionPress = (option) => {
-    // Only allow pressing if the correct answer hasn't been selected yet
     if (!isCorrect) {
       setSelectedOption(option);
       if (option === "B") {
-        setIsCorrect(true); // Mark correct answer
-        setProgress(1); // Update progress
+        setIsCorrect(true);
+        setProgress(1);
       } else {
-        setIsCorrect(false); // Mark incorrect answer
+        setIsCorrect(false);
       }
     }
   };
@@ -83,11 +82,13 @@ const styles = StyleSheet.create({
     paddingTop: 60,
   },
   progressBarContainer: {
-    width: '90%',
-    height: 10,
+    width: '85%',
+    height: 15,
     backgroundColor: Color.colorLightgray,
     borderRadius: 5,
     marginBottom: 20,
+    paddingLeft: 70
+
   },
   progressBar: {
     height: '100%',
@@ -98,8 +99,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: Color.colorDarkslategray_200,
     fontFamily: 'lexend-regular',
-    paddingBottom: 20,
-    paddingTop: 40,
+    paddingTop: 10,
     marginLeft: 40,
     marginRight: 40,
   },
