@@ -2,15 +2,17 @@ import React from 'react';
 import { Pressable, Text, StyleSheet } from 'react-native';
 import { Padding, Border, FontSize } from "../GlobalStyles";
 
-const Button = ({ title, onPress, buttonColor, textColor, borderColor, height, width }) => {
+const Button = ({ title, onPress, buttonColor, textColor, borderColor, height, width, disabled,opacity }) => {
   return (
     <Pressable 
       style={[
         styles.button, 
-        { backgroundColor: buttonColor, height, width },
-        borderColor ? { borderWidth: 2, borderColor: borderColor } : null
+        { backgroundColor: buttonColor, height, width, opacity: disabled ? 0.6 : 1 },
+        borderColor ? { borderWidth: 2, borderColor: borderColor } : null,
       ]}
       onPress={onPress}
+      disabled={disabled}
+      
     >
       <Text style={[styles.buttonText, { color: textColor }]}>
         {title}
