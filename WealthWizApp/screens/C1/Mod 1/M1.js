@@ -134,8 +134,13 @@ const M1 = () => {
         </View>
 
         <Text style={styles.InfoText}>
-          This is placeholder text serving as a filler for the content yet to be added. Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
-        </Text>
+  {"\t"}This is placeholder text serving as a filler for the content yet to be added. Its purpose is to blah blah blah
+  {"\n\t"}
+  {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+  {"\n\t"}
+  {"\n\t"}This one here is also to test some potential formatting as well
+</Text>
+
 
         {/* Question 3 */}
         <View style={styles.questionBox}>
@@ -251,10 +256,13 @@ const styles = StyleSheet.create({
   },
   InfoText: {
     fontSize: 15,
-    paddingHorizontal: 15,
+    paddingHorizontal: 20,
     paddingBottom: 15,
+    borderLeft:20,
+    borderRight:20,
     fontStyle: 'italic',
     fontFamily: 'lexend-regular',
+    flexWrap: 'wrap'
   },
 });
 
