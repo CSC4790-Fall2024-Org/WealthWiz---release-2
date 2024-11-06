@@ -1,13 +1,13 @@
 import React from 'react';
-import { Pressable, Text, StyleSheet } from 'react-native';
+import { Pressable, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Padding, Border, FontSize } from "../GlobalStyles";
 
-const Button = ({ title, onPress, buttonColor, textColor, borderColor, height, width }) => {
+const Button = ({ title, onPress, buttonColor, textColor, borderColor, height, width, left, top }) => {
   return (
-    <Pressable 
+    <TouchableOpacity 
       style={[
         styles.button, 
-        { backgroundColor: buttonColor, height, width },
+        { backgroundColor: buttonColor, height, width, left, top },
         borderColor ? { borderWidth: 2, borderColor: borderColor } : null
       ]}
       onPress={onPress}
@@ -15,7 +15,7 @@ const Button = ({ title, onPress, buttonColor, textColor, borderColor, height, w
       <Text style={[styles.buttonText, { color: textColor }]}>
         {title}
       </Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 

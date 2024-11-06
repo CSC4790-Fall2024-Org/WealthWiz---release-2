@@ -21,7 +21,7 @@ import M1 from "./screens/C1/Mod 1/M1"; //First Module Main Screen
 import M2 from "./screens/C1/Mod 2/M2";//Second Module Main Screen
 import M3 from "./screens/C1/Mod 3/M3"; //Third Module Main Screen
 import Quiz1 from "./screens/C1/Quiz1";
-import CourseHome from "./screens/C1/CourseHome";
+import StockMarketHome from "./screens/C1/StockMarketHome";
 
 const Stack = createNativeStackNavigator();
 
@@ -46,7 +46,7 @@ const App = () => {
     <>
       <NavigationContainer>
         {hideSplashScreen ? (
-          <Stack.Navigator initialRouteName="CourseHome" screenOptions={{ headerShown: false }}> 
+          <Stack.Navigator initialRouteName="HomePage" screenOptions={{ headerShown: false }}> 
             <Stack.Screen name="StartScreenNewUser" component={StartScreenNewUser} />
             <Stack.Screen name="Register1" component={Register1} />
             <Stack.Screen name="Register2" component={Register2} />
@@ -61,7 +61,7 @@ const App = () => {
             <Stack.Screen name="M2" component={M2} /> 
             <Stack.Screen name="M3" component={M3} /> 
             <Stack.Screen name="Quiz1" component={Quiz1} /> 
-            <Stack.Screen name="CourseHome" component={CourseHome} /> 
+            <Stack.Screen name="StockMarketHome" component={StockMarketHome} /> 
           </Stack.Navigator>
         ) : null}
       </NavigationContainer>
