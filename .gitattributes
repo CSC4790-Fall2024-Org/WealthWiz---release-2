@@ -2,8 +2,8 @@
 * text=auto
 
 # Explicitly define line endings for specific file types (optional)
-*.sh text eol=lf        # For shell scripts, use LF line endings
-*.bat text eol=crlf      # For batch files, use CRLF line endings
+*.sh text eol=lf   # For shell scripts, use LF line endings
+*.bat text eol=crlf # For batch files, use CRLF line endings
 
 # Treat these files as binary files (do not alter line endings)
 *.jpg binary
