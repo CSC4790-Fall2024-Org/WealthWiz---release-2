@@ -1,0 +1,20 @@
+# Handle all text files with automatic line ending normalization
+* text=auto
+
+# Explicitly define line endings for specific file types (optional)
+*.sh text eol=lf        # For shell scripts, use LF line endings
+*.bat text eol=crlf      # For batch files, use CRLF line endings
+
+# Treat these files as binary files (do not alter line endings)
+*.jpg binary
+*.png binary
+*.gif binary
+*.pdf binary
+
+# If you're using JSON or YAML, ensure they have consistent line endings
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+
+# Make sure markdown files are treated as text with consistent line endings
+*.md text eol=lf
