@@ -67,10 +67,7 @@ const M1 = () => {
         <View style={[styles.progressBar, { width: `${getProgress() * 100}%` }]} />
       </View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <Text style={styles.ModuleText}>Module 1</Text>
-        <Text style={styles.firstText}>
-        {"\t"} Welcome to Module 1! This module explain the funadmentals of INSERT FUTURE TOPIC 
-        </Text>
+        <Text style={styles.ModuleText}>Stock Basics</Text>
         <View style = {styles.line}></View>
         <Text style={styles.InfoText}>
           {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
@@ -93,8 +90,7 @@ const M1 = () => {
                   },
                   isCorrect1 && { opacity: 0.6 },
                 ]}
-                disabled={isCorrect1}
-              >
+                disabled={isCorrect1}>
                 <Text style={styles.optionText}>{option}</Text>
               </Pressable>
             ))}
@@ -242,15 +238,14 @@ const styles = StyleSheet.create({
     color: Color.colorSeagreen,
     fontFamily: 'lexend-regular',
     paddingTop: 5,
-    paddingBottom: 10,
+    paddingBottom:10,
     marginLeft: 40,
     marginRight: 40,
   },
   line:{
       width: '90%',
-      height: 2,
+      height: 10,
       backgroundColor: Color.colorSeagreen,
-      paddingBottom: 15,
       marginBottom:15,
       borderRadius:4,
   },
