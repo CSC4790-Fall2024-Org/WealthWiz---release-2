@@ -20,6 +20,7 @@ import Investing from "./screens/Investing";
 import M1 from "./screens/C1/Mod 1/M1"; //First Module Main Screen
 import M2 from "./screens/C1/Mod 2/M2";//Second Module Main Screen
 import M3 from "./screens/C1/Mod 3/M3"; //Third Module Main Screen
+import M4 from "./screens/C1/Mod 4/M4";
 import Quiz1 from "./screens/C1/Quiz1";
 import StockMarketHome from "./screens/C1/StockMarketHome";
 
@@ -60,6 +61,7 @@ const App = () => {
             <Stack.Screen name="M1" component={M1} /> 
             <Stack.Screen name="M2" component={M2} /> 
             <Stack.Screen name="M3" component={M3} /> 
+            <Stack.Screen name="M4" component={M4} /> 
             <Stack.Screen name="Quiz1" component={Quiz1} /> 
             <Stack.Screen name="StockMarketHome" component={StockMarketHome} /> 
           </Stack.Navigator>

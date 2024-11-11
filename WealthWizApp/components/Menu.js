@@ -11,7 +11,7 @@ const Menu = () => {
     <View style={styles.menuContainer}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("")}
+        onPress={() => navigation.navigate("Achievements")}
       >
       <Image
         style={styles.podiumIcon}
@@ -33,7 +33,7 @@ const Menu = () => {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("")}
+        onPress={() => navigation.navigate("ProfilePage")}
       >
       <Image
         style={styles.profileIcon}

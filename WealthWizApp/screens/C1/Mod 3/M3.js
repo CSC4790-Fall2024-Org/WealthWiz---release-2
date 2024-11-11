@@ -60,139 +60,21 @@ const M3 = () => {
   };
 
   return (
-    <View style={styles.m1}>
-      <NavBar1 />
-      {/* Progress Bar */}
-      <View style={styles.progressBarContainer}>
-        <View style={[styles.progressBar, { width: `${getProgress() * 100}%` }]} />
-      </View>
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <Text style={styles.ModuleText}>Module 2</Text>
-        <View style = {styles.line}></View>
-        <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
-          {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
-        </Text>
-
-        {/* Question 1 */}
-        <View style={styles.questionBox}>
-          <Text style={styles.questionText}>What is the capital of France?</Text>
-          <View style={styles.optionsContainer}>
-            {["A. Berlin", "B. Paris", "C. Madrid", "D. Rome"].map((option, index) => (
-              <Pressable
-                key={index}
-                onPress={() => handleOptionPress1(option.charAt(0))}
-                style={[
-                  styles.optionButton,
-                  selectedOption1 === option.charAt(0) && {
-                    backgroundColor: option.charAt(0) === "B" ? Color.colorSeagreen : "red",
-                  },
-                  isCorrect1 && { opacity: 0.6 },
-                ]}
-                disabled={isCorrect1}>
-                <Text style={styles.optionText}>{option}</Text>
-              </Pressable>
-            ))}
-          </View>
-          {selectedOption1 && (
-            <Text style={{ ...styles.feedbackText, color: isCorrect1 ? Color.colorSeagreen : 'red' }}>
-              {isCorrect1 ? "Correct! Paris is the capital of France." : "Incorrect. Try again!"}
-            </Text>
-          )}
-        </View>
-
-        {/*Text 3*/}
-        {isCorrect1 && (
-          <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
-          {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
-        </Text>
-        )}
-
-        {/* Question 2 */}
-        {isCorrect1 && (
-          <View style={styles.questionBox}>
-            <Text style={styles.questionText}>What is the largest ocean on Earth?</Text>
-            <View style={styles.optionsContainer}>
-              {["A. Atlantic Ocean", "B. Indian Ocean", "C. Arctic Ocean", "D. Pacific Ocean"].map((option, index) => (
-                <Pressable
-                  key={index}
-                  onPress={() => handleOptionPress2(option.charAt(0))}
-                  style={[
-                    styles.optionButton,
-                    selectedOption2 === option.charAt(0) && {
-                      backgroundColor: option.charAt(0) === "D" ? Color.colorSeagreen : "red",
-                    },
-                    isCorrect2 && { opacity: 0.6 },
-                  ]}
-                  disabled={isCorrect2}
-                >
-                  <Text style={styles.optionText}>{option}</Text>
-                </Pressable>
-              ))}
-            </View>
-            {selectedOption2 && (
-              <Text style={{ ...styles.feedbackText, color: isCorrect2 ? 'green' : 'red' }}>
-                {isCorrect2 ? "Correct! The Pacific Ocean is the largest ocean on Earth." : "Incorrect. Try again!"}
-              </Text>
-            )}
-          </View>
-        )}
-
-        {/*Text 3*/}
-        {isCorrect2 && (
-          <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
-          {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
-          </Text>
-        )}
-
-        {/* Question 3 (conditionally rendered) */}
-        {isCorrect2 && (
-          <View style={styles.questionBox}>
-            
-            <Text style={styles.questionText}>What is the longest river in the world?</Text>
-            <View style={styles.optionsContainer}>
-              {["A. Amazon River", "B. Nile River", "C. Yangtze River", "D. Mississippi River"].map((option, index) => (
-                <Pressable
-                  key={index}
-                  onPress={() => handleOptionPress3(option.charAt(0))}
-                  style={[
-                    styles.optionButton,
-                    selectedOption3 === option.charAt(0) && {
-                      backgroundColor: option.charAt(0) === "B" ? Color.colorSeagreen : "red",
-                    },
-                    isCorrect3 && { opacity: 0.6 },
-                  ]}
-                  disabled={isCorrect3}
-                >
-                  <Text style={styles.optionText}>{option}</Text>
-                </Pressable>
-              ))}
-            </View>
-            {selectedOption3 && (
-              <Text style={{ ...styles.feedbackText, color: isCorrect3 ? 'green' : 'red' }}>
-                {isCorrect3 ? "Correct! The Nile River is the longest river in the world." : "Incorrect. Try again!"}
-              </Text>
-            )}
-          </View>
-        )}
-
-        {/* Finish Button */}
-        <Button
-          title="Finish Module"
-          onPress={() => navigation.navigate("CourseHome")}
-          buttonColor={Color.colorSeagreen}
-          textColor={Color.black0}
+    <View style={styles.m3}>
+      <NavBar1/>
+      <Text style={styles.text}>
+        Module 3
+      </Text>
+      <Button
+          title="Next" 
+          onPress={() => navigation.navigate("M4")}
+          buttonColor={Color.colorSeagreen} 
+          textColor={Color.black0} 
           height={65}
           width={350}
           disabled={correct < 3}
         />
-      </ScrollView>
-    </View>
+      </View>
   );
 };
 

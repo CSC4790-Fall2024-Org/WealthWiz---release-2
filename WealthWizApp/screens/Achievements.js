@@ -14,9 +14,11 @@ import GroupComponent1 from "../components/GroupComponent1";
 import GroupComponent from "../components/GroupComponent";
 import NavBar from "../components/NavBar";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
+import Menu from "../components/Menu";
 
 const Achievements = () => {
   return (
+    <View style={styles.container}>
     <View style={styles.achievements}>
       <StatusBar style={styles.childPosition} translucent={true} />
       <View style={[styles.cardTotalAchievement, styles.cardLayout]}>
@@ -58,10 +60,16 @@ const Achievements = () => {
         showIcon={false}
       />
     </View>
+    <Menu/>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+  },
   childPosition: {
     left: 0,
     top: 0,

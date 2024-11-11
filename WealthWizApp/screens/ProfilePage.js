@@ -18,11 +18,13 @@ import {
   Border,
   Padding,
 } from "../GlobalStyles";
+import Menu from "../components/Menu";
 
 const ProfilePage = () => {
   const navigation = useNavigation();
 
   return (
+    <View style={styles.container}>
     <View style={styles.profilePage}>
       <Image
         style={styles.backgroundImage}
@@ -98,10 +100,16 @@ const ProfilePage = () => {
         </View>
       </View>
     </View>
+    <Menu/>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+  },
   statusBar: {
     position: "absolute",
     top: 0,
