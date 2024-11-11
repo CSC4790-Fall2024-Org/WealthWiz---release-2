@@ -184,7 +184,7 @@ const M1 = () => {
         {/* Finish Button */}
         <Button
           title="Finish Module"
-          onPress={() => navigation.navigate("CourseHome")}
+          onPress={() => navigation.navigate("StockMarketHome")}
           buttonColor={Color.colorSeagreen}
           textColor={Color.black0}
           height={65}
