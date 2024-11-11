@@ -22,8 +22,10 @@ import {
 } from "../GlobalStyles";
 import FormField from "../components/FormField";
 import Button from "../components/Button";
-import { auth } from "../firebaseConfig";
+import { auth, db, database } from "../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";  // Firestore imports
+import { ref, get, set } from "firebase/database";         // Realtime Database imports
 
 const Login = () => {
   const navigation = useNavigation();
@@ -41,12 +43,58 @@ const Login = () => {
     setGoogleVisible(false);
   }, []);
 
+  // Initialize or fetch user progress in Firestore
+  const initializeOrFetchUserProgressFirestore = async (userId) => {
+    try {
+      const docRef = doc(db, "userProgress", userId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        // Return existing progress
+        return docSnap.data().progress;
+      } else {
+        // Initialize progress if it doesn't exist
+        await setDoc(docRef, { progress: 0 });
+        return 0;
+      }
+    } catch (error) {
+      console.error("Error fetching/initializing user progress:", error);
+    }
+  };
+
+  // Initialize or fetch user progress in Realtime Database
+  const initializeOrFetchUserProgressRealtime = async (userId) => {
+    try {
+      const userRef = ref(database, `userProgress/${userId}`);
+      const snapshot = await get(userRef);
+      if (snapshot.exists()) {
+        // Return existing progress
+        return snapshot.val().progress;
+      } else {
+        // Initialize progress if it doesn't exist
+        await set(userRef, { progress: 0 });
+        return 0;
+      }
+    } catch (error) {
+      console.error("Error fetching/initializing user progress:", error);
+    }
+  };
+
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Fetch or initialize progress in Firestore or Realtime Database
+      let progress;
+      // Uncomment one of these lines depending on your choice of database:
+      // progress = await initializeOrFetchUserProgressFirestore(user.uid);
+      progress = await initializeOrFetchUserProgressRealtime(user.uid);
+
       setModalMessage('Login successful!');
       setModalVisible(true);
-      navigation.navigate("HomePage");
+
+      // Navigate to HomePage and optionally pass progress
+      navigation.navigate("M1", { progress });
     } catch (error) {
       setModalMessage(`Invalid Username/Password. Please Try Again!`);
       setModalVisible(true);
@@ -131,6 +179,7 @@ const Login = () => {
     </>
   );
 };
+
 
 const styles = StyleSheet.create({
   login: {

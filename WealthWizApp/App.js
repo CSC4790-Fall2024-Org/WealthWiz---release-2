@@ -46,7 +46,7 @@ const App = () => {
     <>
       <NavigationContainer>
         {hideSplashScreen ? (
-          <Stack.Navigator initialRouteName="M1" screenOptions={{ headerShown: false }}> 
+          <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}> 
             <Stack.Screen name="StartScreenNewUser" component={StartScreenNewUser} />
             <Stack.Screen name="Register1" component={Register1} />
             <Stack.Screen name="Register2" component={Register2} />
