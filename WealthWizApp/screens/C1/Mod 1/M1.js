@@ -1,15 +1,11 @@
-import React, { useState } from "react";
-import {
-  Text,
-  StyleSheet,
-  Pressable,
-  View,
-  ScrollView,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, StyleSheet, Pressable, View, ScrollView } from "react-native";
 import { Color } from "../../../GlobalStyles";
 import NavBar1 from "../../../components/NavBar1";
 import { useNavigation } from "@react-navigation/native";
 import Button from "../../../components/Button";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../../firebaseConfig";
 
 const M1 = () => {
   const navigation = useNavigation();
@@ -21,15 +17,65 @@ const M1 = () => {
   const [isCorrect3, setIsCorrect3] = useState(false);
   const [correct, setCorrect] = useState(0);
 
+  useEffect(() => {
+    const loadProgress = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (userDoc.exists()) {
+          const progress = userDoc.data().progress?.module1 || 0;
+          setCorrect(progress);
+
+          // Set correct answers and options based on saved progress
+          if (progress >= 1) {
+            setIsCorrect1(true);
+            setSelectedOption1("B"); // Correct answer for Question 1
+          }
+          if (progress >= 2) {
+            setIsCorrect2(true);
+            setSelectedOption2("D"); // Correct answer for Question 2
+          }
+          if (progress >= 3) {
+            setIsCorrect3(true);
+            setSelectedOption3("B"); // Correct answer for Question 3
+          }
+        }
+      }
+    };
+
+    loadProgress();
+  }, []);
+
+  const updateUserProgress = async (progress) => {
+    const user = auth.currentUser;
+    if (user) {
+      const userDocRef = doc(db, "users", user.uid);
+
+      try {
+        await setDoc(
+          userDocRef,
+          { progress: { module1: progress } },
+          { merge: true }
+        );
+      } catch (error) {
+        console.error("Error updating progress:", error);
+      }
+    }
+  };
+
   const updateCorrectCount = (isCorrect, setIsCorrect) => {
     if (!isCorrect) {
       setIsCorrect(true);
-      setCorrect((prev) => prev + 1);
+      const newCorrect = correct + 1;
+      setCorrect(newCorrect);
+      updateUserProgress(newCorrect);
     }
   };
 
   const getProgress = () => {
-    return correct / 3; 
+    return correct / 3;
   };
 
   const handleOptionPress1 = (option) => {
@@ -42,9 +88,9 @@ const M1 = () => {
   };
 
   const handleOptionPress2 = (option) => {
-    if (!isCorrect2 && isCorrect1) { 
+    if (!isCorrect2 && isCorrect1) {
       setSelectedOption2(option);
-      if (option === "D") { 
+      if (option === "D") {
         updateCorrectCount(isCorrect2, setIsCorrect2);
       }
     }
@@ -68,7 +114,7 @@ const M1 = () => {
       </View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <Text style={styles.ModuleText}>Stock Basics</Text>
-        <View style = {styles.line}></View>
+        <View style={styles.line}></View>
         <Text style={styles.InfoText}>
           {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
           {"\n\t"}
@@ -95,20 +141,21 @@ const M1 = () => {
               </Pressable>
             ))}
           </View>
-          {selectedOption1 && (
-            <Text style={{ ...styles.feedbackText, color: isCorrect1 ? Color.colorSeagreen : 'red' }}>
-              {isCorrect1 ? "Correct! Paris is the capital of France." : "Incorrect. Try again!"}
+          {(selectedOption1 === "B" || isCorrect1) && (
+            <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
+              Correct! Paris is the capital of France.
             </Text>
           )}
         </View>
 
-        {/*Text 3*/}
+
+        {/*Text 2*/}
         {isCorrect1 && (
           <Text style={styles.InfoText}>
           {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
           {"\n\t"}
           {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
-        </Text>
+          </Text>
         )}
 
         {/* Question 2 */}
@@ -133,9 +180,9 @@ const M1 = () => {
                 </Pressable>
               ))}
             </View>
-            {selectedOption2 && (
-              <Text style={{ ...styles.feedbackText, color: isCorrect2 ? 'green' : 'red' }}>
-                {isCorrect2 ? "Correct! The Pacific Ocean is the largest ocean on Earth." : "Incorrect. Try again!"}
+            {(selectedOption2 === "D" || isCorrect2) && (
+              <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
+                Correct! The Pacific Ocean is the largest ocean on Earth.
               </Text>
             )}
           </View>
@@ -150,10 +197,9 @@ const M1 = () => {
           </Text>
         )}
 
-        {/* Question 3 (conditionally rendered) */}
+        {/*Question 3*/}
         {isCorrect2 && (
           <View style={styles.questionBox}>
-            
             <Text style={styles.questionText}>What is the longest river in the world?</Text>
             <View style={styles.optionsContainer}>
               {["A. Amazon River", "B. Nile River", "C. Yangtze River", "D. Mississippi River"].map((option, index) => (
@@ -173,9 +219,9 @@ const M1 = () => {
                 </Pressable>
               ))}
             </View>
-            {selectedOption3 && (
-              <Text style={{ ...styles.feedbackText, color: isCorrect3 ? 'green' : 'red' }}>
-                {isCorrect3 ? "Correct! The Nile River is the longest river in the world." : "Incorrect. Try again!"}
+            {(selectedOption3 === "B" || isCorrect3) && (
+              <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
+                Correct! The Nile River is the longest river in the world.
               </Text>
             )}
           </View>
