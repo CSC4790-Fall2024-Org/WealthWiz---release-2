@@ -28,18 +28,17 @@ const M1 = () => {
           const progress = userDoc.data().progress?.module1 || 0;
           setCorrect(progress);
 
-          // Set correct answers and options based on saved progress
           if (progress >= 1) {
             setIsCorrect1(true);
-            setSelectedOption1("B"); // Correct answer for Question 1
+            setSelectedOption1("B");
           }
           if (progress >= 2) {
             setIsCorrect2(true);
-            setSelectedOption2("D"); // Correct answer for Question 2
+            setSelectedOption2("D");
           }
           if (progress >= 3) {
             setIsCorrect3(true);
-            setSelectedOption3("B"); // Correct answer for Question 3
+            setSelectedOption3("B");
           }
         }
       }
@@ -230,7 +229,7 @@ const M1 = () => {
         {/* Finish Button */}
         <Button
           title="Finish Module"
-          onPress={() => navigation.navigate("StockMarketHome")}
+          onPress={() => navigation.navigate("M2")}
           buttonColor={Color.colorSeagreen}
           textColor={Color.black0}
           height={65}
