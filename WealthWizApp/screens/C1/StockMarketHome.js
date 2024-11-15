@@ -1,14 +1,63 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, Pressable, Text, View, TouchableOpacity, ScrollView, StatusBar, Dimensions } from "react-native";
+import { StyleSheet, Pressable, Text, View, TouchableOpacity, ScrollView, StatusBar } from "react-native";
 import { Color, FontFamily, FontSize } from "../../GlobalStyles";
 import NavBar1 from "../../components/NavBar1";
 import { useNavigation } from "@react-navigation/native";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../firebaseConfig";
 
 const StockMarketHome = () => {
 
   const navigation = useNavigation();
-  const { width, height } = Dimensions.get('window');
+  const [correct, setCorrect] = useState(0);
+  
+    useEffect(() => {
+      const loadProgress = async () => {
+        const user = auth.currentUser;
+        if (user) {
+          const userDocRef = doc(db, "users", user.uid);
+          const userDoc = await getDoc(userDocRef);
+  
+          if (userDoc.exists()) {
+            const progress = userDoc.data().progress?.module1 || 0;
+            setCorrect(progress);
+          }
+        }
+      };
+  
+      loadProgress();
+    }, []);
+  
+    const updateUserProgress = async (progress) => {
+      const user = auth.currentUser;
+      if (user) {
+        const userDocRef = doc(db, "users", user.uid);
+  
+        try {
+          await setDoc(
+            userDocRef,
+            { progress: { module1: progress } },
+            { merge: true }
+          );
+        } catch (error) {
+          console.error("Error updating progress:", error);
+        }
+      }
+    };
+
+    const updateCorrectCount = (isCorrect, setIsCorrect) => {
+      if (!isCorrect) {
+        setIsCorrect(true);
+        const newCorrect = correct + 1;
+        setCorrect(newCorrect);
+        updateUserProgress(newCorrect);
+      }
+    };
+  
+    const getProgress = () => {
+      return correct / 3;
+    };
 
   return (
     <View style={styles.container}>
@@ -140,7 +189,6 @@ const styles = StyleSheet.create({
     height: 550,
     justifyContent: 'center',
     alignItems: 'center',
-    //borderWidth: 2.5,
     borderColor: '#CBD2DA',
   },
   dottedLines: {
@@ -206,118 +254,6 @@ const styles = StyleSheet.create({
     right: "33%",
     opacity: 0.25,
   },
-
-
-
-  // coin13Position: {
-  //   left: "0%",
-  //   right: "70.25%",
-  //   width: "29.75%",
-  //   height: "22.4%",
-  //   position: "relative",
-  // },
-  // parentPosition: {
-  //   left: "70.25%",
-  //   right: "0%",
-  //   width: "29.75%",
-  //   height: "22.4%",
-  //   position: "absolute",
-  // },
-  // levelFlexBox: {
-  //   opacity: 0.25,
-  //   height: 20,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   display: "flex",
-  //   textAlign: "center",
-  //   color: Color.colorWhite,
-  //   fontFamily: FontFamily.extraLargeTextRegular,
-  //   lineHeight: 20,
-  //   letterSpacing: 0,
-  //   fontSize: FontSize.size_xs,
-  //   top: 0,
-  //   left: "50%",
-  //   position: "absolute",
-  // },
-  // bank4Position: {
-  //   width: 97,
-  //   bottom: "0%",
-  //   left: "50%",
-  //   position: "absolute",
-  // },
-  // coin13Icon: {
-  //   maxWidth: "100%",
-  //   bottom: "0%",
-  //   right: "0%",
-  //   overflow: "hidden",
-  //   top: "13.39%",
-  //   height: "86.61%",
-  //   left: "0%",
-  //   position: "absolute",
-  //   width: "100%",
-  // },
-  // level1: {
-  //   height: 20,
-  //   lineHeight: 20,
-  //   width: 54,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   display: "flex",
-  //   textAlign: "center",
-  //   color: Color.colorWhite,
-  //   fontFamily: FontFamily.extraLargeTextRegular,
-  //   letterSpacing: 0,
-  //   fontSize: FontSize.size_xs,
-  //   top: 0,
-  //   marginLeft: -26.5,
-  //   left: "50%",
-  //   position: "absolute",
-  // },
-  // level2: {
-  //   width: 54,
-  //   opacity: 0.25,
-  //   marginLeft: -26.5,
-  // },
-  // coin14Parent: {
-  //   top: "19.4%",
-  //   bottom: "58.2%",
-  // },
-  // level4: {
-  //   marginLeft: -25.5,
-  //   width: 54,
-  //   opacity: 0.25,
-  // },
-  // coin15Parent: {
-  //   top: "58.2%",
-  //   bottom: "19.4%",
-  // },
-  // bank4Icon: {
-  //   marginLeft: -48.5,
-  //   overflow: "hidden",
-  //   top: "13.39%",
-  //   height: "86.61%",
-  //   maxHeight: "100%",
-  //   width: 97,
-  // },
-  // finalLevel: {
-  //   marginLeft: -40.5,
-  //   width: 81,
-  // },
-  // bank4Parent: {
-  //   marginLeft: -163,
-  //   top: "77.6%",
-  //   width: 97,
-  //   height: "22.4%",
-  // },
-  // level3: {
-  //   marginLeft: -28.5,
-  //   width: 54,
-  //   opacity: 0.25,
-  // },
-  // coin13Group: {
-  //   top: "38.8%",
-  //   bottom: "38.8%",
-  // },
 });
 
 export default StockMarketHome;
