@@ -105,7 +105,7 @@ const M4 = () => {
   };
 
   return (
-    <View style={styles.m4}>
+    <View style={styles.m3}>
       <NavBar1 />
       {/* Progress Bar */}
       <View style={styles.progressBarContainer}>
@@ -229,7 +229,7 @@ const M4 = () => {
         {/* Finish Button */}
         <Button
           title="Finish Module"
-          onPress={() => navigation.navigate("StockMarketHome")}
+          onPress={() => navigation.navigate("Quiz1")}
           buttonColor={Color.colorSeagreen}
           textColor={Color.black0}
           height={65}
@@ -242,7 +242,7 @@ const M4 = () => {
 };
 
 const styles = StyleSheet.create({
-  m4: {
+  m3: {
     backgroundColor: Color.black0,
     flex: 1,
     alignItems: 'center',
