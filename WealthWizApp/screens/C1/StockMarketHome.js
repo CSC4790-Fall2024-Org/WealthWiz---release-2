@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { Image } from "expo-image";
 import { StyleSheet, Pressable, Text, View, TouchableOpacity, ScrollView, StatusBar } from "react-native";
 import { Color, FontFamily, FontSize } from "../../GlobalStyles";
