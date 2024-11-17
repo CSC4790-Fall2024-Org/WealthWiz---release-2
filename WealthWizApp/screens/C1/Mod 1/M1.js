@@ -12,9 +12,9 @@ const M1 = () => {
   const [selectedOption1, setSelectedOption1] = useState(null);
   const [selectedOption2, setSelectedOption2] = useState(null);
   const [selectedOption3, setSelectedOption3] = useState(null);
-  const [isCorrect1, setIsCorrect1] = useState(false);
-  const [isCorrect2, setIsCorrect2] = useState(false);
-  const [isCorrect3, setIsCorrect3] = useState(false);
+  const [isCorrect1, setIsCorrect1] = useState(null);
+  const [isCorrect2, setIsCorrect2] = useState(null);
+  const [isCorrect3, setIsCorrect3] = useState(null);
   const [correct, setCorrect] = useState(0);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const M1 = () => {
   };
 
   const updateCorrectCount = (isCorrect, setIsCorrect) => {
-    if (!isCorrect) {
+    if (!isCorrect || isCorrect === null) {
       setIsCorrect(true);
       const newCorrect = correct + 1;
       setCorrect(newCorrect);
@@ -83,6 +83,9 @@ const M1 = () => {
       if (option === "B") {
         updateCorrectCount(isCorrect1, setIsCorrect1);
       }
+      else {
+        setIsCorrect1(false)
+      }
     }
   };
 
@@ -92,6 +95,9 @@ const M1 = () => {
       if (option === "C") {
         updateCorrectCount(isCorrect2, setIsCorrect2);
       }
+      else {
+        setIsCorrect2(false)
+      }
     }
   };
 
@@ -100,6 +106,9 @@ const M1 = () => {
       setSelectedOption3(option);
       if (option === "B") {
         updateCorrectCount(isCorrect3, setIsCorrect3);
+      }
+      else {
+        setIsCorrect3(false)
       }
     }
   };
@@ -145,16 +154,27 @@ const M1 = () => {
               Correct! A stock represents ownership in a company, and a share is a single unit of that ownership.
             </Text>
           )}
+          
+          {(isCorrect1 === false) && (
+            <Text style={{ ...styles.feedbackText, color: "red" }}>
+              {"\t"}Incorrect! The correct answer is a stock represents the ownership in a company, and a share is a single unit of that ownership.
+              {"\n\t"}Using our previous example Company X would be a stock as it represents the entire ownership of that company meanwhile a single piece of the ownership
+              in the stock of Company X would be considered a share of Company X
+            </Text>
+          )}
         </View>
 
 
         {/*Text 2*/}
         {isCorrect1 && (
-          <Text style={styles.InfoText}>
-          {"\t"}The stock market is a network of exchanges where people can buy and sell ownership in publicly traded companies through shares of stock. Companies list their shares on the market to raise money for growth, and investors trade these shares with the goal of making a profit.  
-          {"\n\t"}
-          {"\n\t"}Prices of stocks change based on supply and demand, news about the company, and overall market trends. Examples of stock markets include the New York Stock Exchange (NYSE) and Nasdaq. 
-          </Text>
+          <View>
+            <Text style={styles.ModuleText}>  Stock Markets</Text>
+            <Text style={styles.InfoText}>
+            {"\t"}The stock market is a network of exchanges where people can buy and sell ownership in publicly traded companies through shares of stock. Companies list their shares on the market to raise money for growth, and investors trade these shares with the goal of making a profit.  
+            {"\n\t"}
+            {"\n\t"}Prices of stocks change based on supply and demand, news about the company, and overall market trends. Examples of stock markets include the New York Stock Exchange (NYSE) and Nasdaq. 
+            </Text>
+          </View>
         )}
 
         {/* Question 2 */}
@@ -184,16 +204,27 @@ const M1 = () => {
                 Correct! A stock market is a marketplace where investors trade shares of ownership in companies.
               </Text>
             )}
+
+            {(isCorrect2 === false) && (
+              <Text style={{ ...styles.feedbackText, color: "red" }}>
+                {"\t"}Incorrect! The correct answer is a marketplace where investors trade shares of ownership in companies.
+                {"\n\t"}A stock market is accessible to any investor and it is where companies are listed and their shares are made available, for investors, 
+                to purchase
+              </Text>
+          )}
           </View>
         )}
 
         {/*Text 3*/}
         {isCorrect2 && (
-          <Text style={styles.InfoText}>
-          {"\t"}When a company like Company X needs more money to grow, it might decide to "go public" by offering its stock to the public through a stock market. This turns Company X into a public company, meaning anyone can buy shares and own a small piece of the business. 
-          {"\n\t"}
-          {"\n\t"}The stock market also uses indices to track groups of companies and show how the market is performing overall. For example, an index like the S&P 500 tracks the stock prices of 500 large companies, giving investors a way to see if the market is doing well or poorly without looking at individual stocks. So, if the S&P 500 rises, it means many of those 500 companies’ stock prices went up.
-          </Text>
+          <View>
+            <Text style={styles.ModuleText}>Public Companies and Indices</Text>
+            <Text style={styles.InfoText}>
+            {"\t"}When a company like Company X needs more money to grow, it might decide to "go public" by offering its stock to the public through a stock market. This turns Company X into a public company, meaning anyone can buy shares and own a small piece of the business. 
+            {"\n\t"}
+            {"\n\t"}The stock market also uses indices to track groups of companies and show how the market is performing overall. For example, an index like the S&P 500 tracks the stock prices of 500 large companies, giving investors a way to see if the market is doing well or poorly without looking at individual stocks. So, if the S&P 500 rises, it means many of those 500 companies’ stock prices went up.
+            </Text>
+          </View>
         )}
 
         {/*Question 3*/}
@@ -223,6 +254,14 @@ const M1 = () => {
                 Correct! A public company offers its stock to the public, while an index tracks the performance of groups of stocks.
               </Text>
             )}
+
+            {(isCorrect3 === false) && (
+              <Text style={{ ...styles.feedbackText, color: "red" }}>
+                {"\t"}Incorrect! The correct answer is a public company offers its stock to the public, while an index tracks the performance of groups of stocks.
+                {"\n\t"}A public company is defined as a company that is listed on the stock market and offers its shares to investors. An index on the other hand
+                is used to track how individual sectors of the market are performing as a whole. 
+              </Text>
+          )}
           </View>
         )}
 
