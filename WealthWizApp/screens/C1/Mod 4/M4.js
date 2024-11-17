@@ -12,9 +12,9 @@ const M4 = () => {
   const [selectedOption1, setSelectedOption1] = useState(null);
   const [selectedOption2, setSelectedOption2] = useState(null);
   const [selectedOption3, setSelectedOption3] = useState(null);
-  const [isCorrect1, setIsCorrect1] = useState(false);
-  const [isCorrect2, setIsCorrect2] = useState(false);
-  const [isCorrect3, setIsCorrect3] = useState(false);
+  const [isCorrect1, setIsCorrect1] = useState(null);
+  const [isCorrect2, setIsCorrect2] = useState(null);
+  const [isCorrect3, setIsCorrect3] = useState(null);
   const [correct, setCorrect] = useState(0);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const M4 = () => {
   };
 
   const updateCorrectCount = (isCorrect, setIsCorrect) => {
-    if (!isCorrect) {
+    if (!isCorrect || isCorrect === null) {
       setIsCorrect(true);
       const newCorrect = correct + 1;
       setCorrect(newCorrect);
@@ -83,6 +83,9 @@ const M4 = () => {
       if (option === "B") {
         updateCorrectCount(isCorrect1, setIsCorrect1);
       }
+      else {
+        setIsCorrect1(false)
+      }
     }
   };
 
@@ -92,6 +95,9 @@ const M4 = () => {
       if (option === "D") {
         updateCorrectCount(isCorrect2, setIsCorrect2);
       }
+      else {
+        setIsCorrect2(false)
+      }
     }
   };
 
@@ -100,6 +106,9 @@ const M4 = () => {
       setSelectedOption3(option);
       if (option === "B") {
         updateCorrectCount(isCorrect3, setIsCorrect3);
+      }
+      else {
+        setIsCorrect3(false)
       }
     }
   };
@@ -145,6 +154,12 @@ const M4 = () => {
               Correct! Paris is the capital of France.
             </Text>
           )}
+          {(isCorrect1 === false) && (
+            <Text style={{ ...styles.feedbackText, color: "red" }}>
+              {"\t"}Incorrect! The correct answer is ...
+              {"\n\t"}This is a placeholder explination :
+            </Text>
+          )}
         </View>
 
 
@@ -184,6 +199,12 @@ const M4 = () => {
                 Correct! The Pacific Ocean is the largest ocean on Earth.
               </Text>
             )}
+            {(isCorrect2 === false) && (
+            <Text style={{ ...styles.feedbackText, color: "red" }}>
+              {"\t"}Incorrect! The correct answer is ...
+              {"\n\t"}This is a placeholder explination :
+            </Text>
+          )}
           </View>
         )}
 
@@ -223,6 +244,12 @@ const M4 = () => {
                 Correct! The Nile River is the longest river in the world.
               </Text>
             )}
+            {(isCorrect3 === false) && (
+            <Text style={{ ...styles.feedbackText, color: "red" }}>
+              {"\t"}Incorrect! The correct answer is ...
+              {"\n\t"}This is a placeholder explination :
+            </Text>
+          )}
           </View>
         )}
 
