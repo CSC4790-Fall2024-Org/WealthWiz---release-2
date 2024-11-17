@@ -94,7 +94,7 @@ const Login = () => {
       setModalVisible(true);
 
       // Navigate to HomePage and optionally pass progress
-      navigation.navigate("M1", { progress });
+      navigation.navigate("HomePage", { progress });
     } catch (error) {
       setModalMessage(`Invalid Username/Password. Please Try Again!`);
       setModalVisible(true);

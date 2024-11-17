@@ -229,7 +229,7 @@ const M1 = () => {
         {/* Finish Button */}
         <Button
           title="Finish Module"
-          onPress={() => navigation.navigate("M2")}
+          onPress={() => navigation.navigate("StockMarketHome")}
           buttonColor={Color.colorSeagreen}
           textColor={Color.black0}
           height={65}
