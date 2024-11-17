@@ -181,7 +181,7 @@ const M1 = () => {
             </View>
             {(selectedOption2 === "C" || isCorrect2) && (
               <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-                Correct! A stock market is a marketplace where investors trade shares of ownership in companies..
+                Correct! A stock market is a marketplace where investors trade shares of ownership in companies.
               </Text>
             )}
           </View>
@@ -190,18 +190,18 @@ const M1 = () => {
         {/*Text 3*/}
         {isCorrect2 && (
           <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}When a company like Company X needs more money to grow, it might decide to "go public" by offering its stock to the public through a stock market. This turns Company X into a public company, meaning anyone can buy shares and own a small piece of the business. 
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}The stock market also uses indices to track groups of companies and show how the market is performing overall. For example, an index like the S&P 500 tracks the stock prices of 500 large companies, giving investors a way to see if the market is doing well or poorly without looking at individual stocks. So, if the S&P 500 rises, it means many of those 500 companies’ stock prices went up.
           </Text>
         )}
 
         {/*Question 3*/}
         {isCorrect2 && (
           <View style={styles.questionBox}>
-            <Text style={styles.questionText}>What is the longest river in the world?</Text>
+            <Text style={styles.questionText}>What is the difference between a public company and an index?</Text>
             <View style={styles.optionsContainer}>
-              {["A. Amazon River", "B. Nile River", "C. Yangtze River", "D. Mississippi River"].map((option, index) => (
+              {["A. A public company sells products directly to the public, while an index tracks the prices of those products.", "B. A public company offers its stock to the public, while an index tracks the performance of groups of stocks.", "C. A public company is managed by the government, while an index is run by private investors.", "D. A public company sets stock prices, while an index determines which companies can sell shares."].map((option, index) => (
                 <Pressable
                   key={index}
                   onPress={() => handleOptionPress3(option.charAt(0))}
@@ -220,7 +220,7 @@ const M1 = () => {
             </View>
             {(selectedOption3 === "B" || isCorrect3) && (
               <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-                Correct! The Nile River is the longest river in the world.
+                Correct! A public company offers its stock to the public, while an index tracks the performance of groups of stocks.
               </Text>
             )}
           </View>
