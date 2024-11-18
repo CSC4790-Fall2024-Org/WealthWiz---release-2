@@ -90,8 +90,8 @@ const Login = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      let progress;
-      progress = await initializeOrFetchUserProgressRealtime(user.uid);
+
+      const userData = await initializeOrFetchUserDetailsRealtime(user.uid);
 
       setModalMessage('Login successful!');
       setModalVisible(true);
