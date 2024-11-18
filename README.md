@@ -2,7 +2,7 @@
 
 To Run WealthWiz on your IOS Mobile Device:
 
-Note: Run on the **main** branch
+Note: Run on the **dev** branch
 
 1) Download the **Expo Go** application from the IOS App Store
 2) Open repository in your prefered IDE.
