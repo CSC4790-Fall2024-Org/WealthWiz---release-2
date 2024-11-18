@@ -83,11 +83,7 @@ const Login = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
-      // Fetch or initialize progress in Firestore or Realtime Database
       let progress;
-      // Uncomment one of these lines depending on your choice of database:
-      // progress = await initializeOrFetchUserProgressFirestore(user.uid);
       progress = await initializeOrFetchUserProgressRealtime(user.uid);
 
       setModalMessage('Login successful!');
@@ -142,12 +138,6 @@ const Login = () => {
             width={350}
           />
           <Pressable style={styles.google} onPress={openGoogle}>
-            <Image
-              style={styles.googleLogoIcon}
-              contentFit="cover"
-              source={require("../assets/google-logo.png")}
-            />
-            <Text style={styles.signInWith}>Sign in with Google</Text>
           </Pressable>
           <View style={styles.dontHaveAccount}>
             <Text style={styles.dontHaveAn}>Don’t have an account?</Text>
@@ -214,7 +204,6 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     alignItems: 'center',
   },
-
   google: {
     flexDirection: "row",
     alignItems: "center",
@@ -233,7 +222,7 @@ const styles = StyleSheet.create({
 
   dontHaveAccount: {
     flexDirection: "row",
-    marginTop: 150,
+    marginTop: 5,
     alignItems: "center",
   },
   dontHaveAn: {
@@ -267,13 +256,18 @@ const styles = StyleSheet.create({
   modalContainer: {
     width: 300,
     padding: 20,
-    backgroundColor: Color.white,
+    backgroundColor: "rgba(60, 60, 67, 0.6)",
     borderRadius: 10,
     alignItems: "center",
+    borderRadius: 10,
+    borderWidth: 5,
+    borderColor: Color.colorSeagreen
   },
   modalMessage: {
     marginBottom: 20,
     textAlign: "center",
+    color: Color.black0,
+    fontSize: 20,
   },
   modalButton: {
     color: Color.colorBlue,
