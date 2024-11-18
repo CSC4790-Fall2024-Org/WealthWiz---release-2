@@ -1,6 +1,4 @@
-# StudentFinanceApp
-
-Release 2 Updated - (Revised) Project Abstract on Wiki
+# StudentFinanceApp - Release 3
 
 To Run WealthWiz on your IOS Mobile Device:
 
@@ -11,6 +9,7 @@ Note: Run on the **main** branch
 3) Double check that you have the expo client installed. Run the following command to install the correct package: **npm install -g expo-cli**
 5) Navigate to the "WealthWizApp" folder using cd commands or an imtegrated terminal
 6) Run the command **npx expo start** in terminal
-7) Scan the generated QR code on your camera. This should launch our application in the Expo app. Enjoy!
+8) Scan the generated QR code on your camera. This should launch our application in the Expo app. Enjoy!
+9) If issues still arise, run **npm install firebase** to install the proper firebase packages on your device
 
 Enjoy expanding your financial knowledge!
