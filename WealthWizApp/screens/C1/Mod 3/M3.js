@@ -131,9 +131,9 @@ const M3 = () => {
 
         {/* Question 1 */}
         <View style={styles.questionBox}>
-          <Text style={styles.questionText}>What is the capital of France?</Text>
+          <Text style={styles.questionText}>If you buy a stock for $20 per share and later sell it for $35 per share, what is your profit per share?</Text>
           <View style={styles.optionsContainer}>
-            {["A. Berlin", "B. Paris", "C. Madrid", "D. Rome"].map((option, index) => (
+            {["A. $20", "B. $15", "C. $35", "D. $5"].map((option, index) => (
               <Pressable
                 key={index}
                 onPress={() => handleOptionPress1(option.charAt(0))}
@@ -151,13 +151,13 @@ const M3 = () => {
           </View>
           {(selectedOption1 === "B" || isCorrect1) && (
             <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-              Correct! Paris is the capital of France.
+              Correct! The answer is $20.
             </Text>
           )}
           {(isCorrect1 === false) && (
             <Text style={{ ...styles.feedbackText, color: "red" }}>
-              {"\t"}Incorrect! The correct answer is ...
-              {"\n\t"}This is a placeholder explination :
+              {"\t"}Incorrect! 
+              {"\n\t"}Try again!
             </Text>
           )}
         </View>
@@ -166,18 +166,18 @@ const M3 = () => {
         {/*Text 2*/}
         {isCorrect1 && (
           <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}Market volatility refers to how much and how quickly stock prices change over a short period. High volatility means stock prices are moving up and down a lot, while low volatility means prices are more stable. 
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}For example, during an economic crisis or major news event, the stock market might experience high volatility, with prices rising or falling dramatically in a single day. On the other hand, in a calm market with steady growth, volatility is low, and prices change gradually. Volatility can be risky for investors, but it also creates opportunities to buy stocks at lower prices or sell them for a profit.
           </Text>
         )}
 
         {/* Question 2 */}
         {isCorrect1 && (
           <View style={styles.questionBox}>
-            <Text style={styles.questionText}>What is the largest ocean on Earth?</Text>
+            <Text style={styles.questionText}>What does market volatility indicate?</Text>
             <View style={styles.optionsContainer}>
-              {["A. Atlantic Ocean", "B. Indian Ocean", "C. Arctic Ocean", "D. Pacific Ocean"].map((option, index) => (
+              {["A. That stock prices are changing slowly and predictably.", "B. That the market is completely risk-free.", "C. That all stocks in the market are losing value.", "D. That stock prices are moving quickly and unpredictably."].map((option, index) => (
                 <Pressable
                   key={index}
                   onPress={() => handleOptionPress2(option.charAt(0))}
@@ -196,13 +196,13 @@ const M3 = () => {
             </View>
             {(selectedOption2 === "D" || isCorrect2) && (
               <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-                Correct! The Pacific Ocean is the largest ocean on Earth.
+                Correct! It is when stock prices are moving quickly and unpredictably.
               </Text>
             )}
             {(isCorrect2 === false) && (
             <Text style={{ ...styles.feedbackText, color: "red" }}>
-              {"\t"}Incorrect! The correct answer is ...
-              {"\n\t"}This is a placeholder explination :
+              {"\t"}Incorrect!
+              {"\n\t"}Try again!
             </Text>
           )}
           </View>
@@ -211,9 +211,9 @@ const M3 = () => {
         {/*Text 3*/}
         {isCorrect2 && (
           <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}Dividends are payments a company makes to its shareholders as a reward for investing. If you own shares in a company that pays dividends, you get a small amount of money for each share you own. 
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}For example, if a company pays a dividend of $2 per share and you own 10 shares, you would receive $20 in dividends. Companies decide how often to pay dividends, such as quarterly or yearly, and not all companies pay them.
           </Text>
         )}
         
@@ -221,9 +221,9 @@ const M3 = () => {
         {/*Question 3*/}
         {isCorrect2 && (
           <View style={styles.questionBox}>
-            <Text style={styles.questionText}>What is the longest river in the world?</Text>
+            <Text style={styles.questionText}>What is a dividend?</Text>
             <View style={styles.optionsContainer}>
-              {["A. Amazon River", "B. Nile River", "C. Yangtze River", "D. Mississippi River"].map((option, index) => (
+              {["A. The increase in a stock's price over time.", "B. A payment a company makes to its shareholders, usually from its profits.", "C. The fee paid to buy or sell shares in the stock market.", "D. The amount of taxes paid on stock market earnings."].map((option, index) => (
                 <Pressable
                   key={index}
                   onPress={() => handleOptionPress3(option.charAt(0))}
@@ -242,13 +242,13 @@ const M3 = () => {
             </View>
             {(selectedOption3 === "B" || isCorrect3) && (
               <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-                Correct! The Nile River is the longest river in the world.
+                Correct! A dividend is a payment a company makes to its shareholders, usually from its profits.
               </Text>
             )}
             {(isCorrect3 === false) && (
             <Text style={{ ...styles.feedbackText, color: "red" }}>
-              {"\t"}Incorrect! The correct answer is ...
-              {"\n\t"}This is a placeholder explination :
+              {"\t"}Incorrect!
+              {"\n\t"}Try again!
             </Text>
           )}
           </View>
