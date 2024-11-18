@@ -7,7 +7,7 @@ const Button = ({ title, onPress, buttonColor, textColor, borderColor, height, w
     <TouchableOpacity 
       style={[
         styles.button, 
-        { backgroundColor: buttonColor, height, width, top, left, opacity: disabled ? 0.6 : 1 },
+        { backgroundColor: buttonColor, height, width, top, left, opacity, opacity: disabled ? 0.6 : 1 },
         borderColor ? { borderWidth: 2, borderColor: borderColor } : null,
       ]}
       onPress={onPress}

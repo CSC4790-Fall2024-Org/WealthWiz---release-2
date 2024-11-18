@@ -124,9 +124,9 @@ const M3 = () => {
         <Text style={styles.ModuleText}>Module 3 Course</Text>
         <View style={styles.line}></View>
         <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}The concept of buying low and selling high is a basic strategy in the stock market to make a profit. It means purchasing a stock when its price is low (less expensive) and then selling it later when the price is higher (more valuable). 
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}For example, if you buy a stock at $10 per share and later sell it for $15 per share, you earn a profit of $5 per share. The difference between the lower buying price and the higher selling price is your profit. This strategy works best if you carefully research which stocks might increase in value over time 
         </Text>
 
         {/* Question 1 */}

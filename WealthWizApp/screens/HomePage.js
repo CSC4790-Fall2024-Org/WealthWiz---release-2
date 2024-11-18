@@ -1,13 +1,40 @@
-import * as React from "react";
+import React, { useState, useCallback } from "react";
 import { Text, StyleSheet, View, ScrollView, StatusBar } from "react-native";
 import { Image } from "expo-image";
 import { FontSize, Color, FontFamily, Border } from "../GlobalStyles";
 import Button from "../components/Button";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import Menu from "../components/Menu";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../firebaseConfig";
 
-const HomePage = () => {
+const HomePage = () => { 
   const navigation = useNavigation();
+  const [coins, setcoins] = useState(0);
+  const [username, setUsername] = useState('user');  // State to store username
+
+  const currentDay = new Date().toLocaleDateString("en-US", { weekday: "short" });
+
+  const loadProgress = async () => {
+    const user = auth.currentUser;
+    if (user) {
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists()) {
+        const progress = userDoc.data().progress || {};
+        setcoins((progress.smquiz || 0) + (progress.module4 || 0) + (progress.module3 || 0) + (progress.module2 || 0) + (progress.module1 || 0));
+        setUsername(userDoc.data().username || '');  // Set username from Firestore
+      }
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      loadProgress();
+    }, [])
+  );
+
   return (
 
     <View style={styles.container}>
@@ -23,63 +50,53 @@ const HomePage = () => {
             contentFit="cover"
             source={require("../assets/coin-7.png")}
           />
-          <Text style={styles.smallText}>100</Text>
+          <Text style={styles.smallText}>{100*coins}</Text>
         </View>
       </View>
       
       <View style={styles.message}>
-        <Text
-            style={styles.greyText}
-            >{`Welcome back, Finbar! You have `}
-          </Text>
-          <Text style={styles.goldText}>100 coins</Text>
-          <Text style={styles.greyText}> to earn today.</Text>
-          <View style={styles.streakCoins}>
-        </View>
+        <Text style={styles.greyText}>
+          {`Welcome back, `}
+        </Text>
+        <Text style={[styles.goldText, { color: '#16a085' }]}>
+          {username}
+        </Text>
+        <Text style={styles.greyText}>
+          {`! You have `}
+        </Text>
+        <Text style={styles.goldText}>{1700-(100*coins)} coins</Text>
+        <Text style={styles.greyText}> to earn today.</Text>
+        <View style={styles.streakCoins}></View>
       </View>
 
       <View style={styles.coinsRow}>
-        <View>
-          <Image
-            style={styles.coinIcon}
-            contentFit="cover"
-            source={require("../assets/coin-8.png")}
-          />
-          <Text style={styles.smallText}>M</Text>
-        </View>
-        <View>
-          <Image
-            style={styles.coinIcon}
-            contentFit="cover"
-            source={require("../assets/coin-9.png")}
-          />
-          <Text style={styles.smallText}>T</Text>
-        </View>
-        <View>
-          <Image
-            style={styles.coinIcon}
-            contentFit="cover"
-            source={require("../assets/coin-9.png")}
-          />
-          <Text style={styles.smallText}>W</Text>
-        </View>
-        <View>
-          <Image
-            style={styles.coinIcon}
-            contentFit="cover"
-            source={require("../assets/coin-9.png")}
-          />
-          <Text style={styles.smallText}>Th</Text>
-        </View>
-        <View>
-          <Image
-            style={styles.coinIcon}
-            contentFit="cover"
-            source={require("../assets/coin-9.png")}
-          />
-          <Text style={styles.smallText}>F</Text>
-        </View>
-      </View>
+            {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, index) => (
+              <View key={index} style={styles.coinContainer}>
+                <Image
+                  style={[
+                    styles.coinIcon,
+                    { opacity: currentDay === day && coins >= 1 ? 1.0 : 0.25 }
+                  ]}
+                  contentFit="cover"
+                  source={require("../assets/coin-8.png")}
+                />
+                <Text
+                  style={[
+                    styles.smallText,
+                    { opacity: currentDay === day && coins >= 1 ? 1.0 : 0.25 }
+                  ]}
+                >
+                  {day === "Mon" ? "M" 
+                   : day === "Tue" ? "T" 
+                   : day === "Wed" ? "W" 
+                   : day === "Thu" ? "Th" 
+                   : day === "Fri" ? "F" 
+                   : day === "Sat" ? "Sa" 
+                   : "Su"}
+                </Text>
+              </View>
+            ))}
+          </View>
 
       <Text style={styles.coursesTitle}>Courses</Text>
 
@@ -95,7 +112,7 @@ const HomePage = () => {
             <Button 
               title="Continue" 
               onPress={() => navigation.navigate("StockMarketHome")} 
-              buttonColor="#fcd227"
+              buttonColor="#2FDB81"
               textColor={Color.black0} 
               height={40}
               width={230}
@@ -119,14 +136,15 @@ const HomePage = () => {
               <Text style={styles.levelText}>LEVEL 0</Text>
             </View>
             <Button 
-              title="Start" 
+              title="Coming Soon" 
               onPress={() => navigation.navigate("")} 
-              buttonColor="#2FDB81"
+              buttonColor="grey"
               textColor={Color.black0} 
               height={40}
               width={230}
               left={10}
               top={20}
+              opacity={0.1}
             />
           </View>
           <Image
@@ -144,10 +162,10 @@ const HomePage = () => {
               </Text>
               <Text style={styles.levelText}>LEVEL 0</Text>
             </View>
-            <Button 
-              title="Start" 
+            <Button
+              title="Coming Soon" 
               onPress={() => navigation.navigate("")} 
-              buttonColor="#2FDB81"
+              buttonColor="grey"
               textColor={Color.black0} 
               height={40}
               width={230}
@@ -179,7 +197,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingTop: 60,
+    paddingTop: "15%",
   },
   topPart: {
     flexDirection: 'row',
@@ -219,13 +237,15 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: 'space-between',
+    justifyContent: "center",
+    //justifyContent: 'space-between',
     width: '100%',
-    paddingHorizontal: 30,
+    // paddingHorizontal: 30,
+    //borderWidth: 1,
   },
   coinIcon: {
-    width: 64,
-    height: 64,
+    width: 57,
+    height: 57,
   },
   greyText: {
     color: Color.colorDarkgray,
