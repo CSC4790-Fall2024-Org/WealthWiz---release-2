@@ -1,4 +1,4 @@
-# StudentFinanceApp - Release 3
+# WealthWiz - Release 3
 
 To Run WealthWiz on your IOS Mobile Device:
 
