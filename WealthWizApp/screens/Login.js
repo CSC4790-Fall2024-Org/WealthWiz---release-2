@@ -90,12 +90,8 @@ const Login = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
-      // Fetch or initialize user details and progress in Firestore or Realtime Database
-      let userData;
-      // Uncomment one of these lines depending on your choice of database:
-      // userData = await initializeOrFetchUserDetailsFirestore(user.uid);
-      userData = await initializeOrFetchUserDetailsRealtime(user.uid);
+      let progress;
+      progress = await initializeOrFetchUserProgressRealtime(user.uid);
 
       setModalMessage('Login successful!');
       setModalVisible(true);
@@ -220,7 +216,6 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     alignItems: 'center',
   },
-
   google: {
     flexDirection: "row",
     alignItems: "center",
@@ -239,7 +234,7 @@ const styles = StyleSheet.create({
 
   dontHaveAccount: {
     flexDirection: "row",
-    marginTop: 150,
+    marginTop: 5,
     alignItems: "center",
   },
   dontHaveAn: {
@@ -273,13 +268,18 @@ const styles = StyleSheet.create({
   modalContainer: {
     width: 300,
     padding: 20,
-    backgroundColor: Color.white,
+    backgroundColor: "rgba(60, 60, 67, 0.6)",
     borderRadius: 10,
     alignItems: "center",
+    borderRadius: 10,
+    borderWidth: 5,
+    borderColor: Color.colorSeagreen
   },
   modalMessage: {
     marginBottom: 20,
     textAlign: "center",
+    color: Color.black0,
+    fontSize: 20,
   },
   modalButton: {
     color: Color.colorBlue,

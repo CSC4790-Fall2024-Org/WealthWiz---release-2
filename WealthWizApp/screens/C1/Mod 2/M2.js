@@ -124,16 +124,16 @@ const M2 = () => {
         <Text style={styles.ModuleText}>Module 2 Course</Text>
         <View style={styles.line}></View>
         <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}Market capitalization, or market cap, is the total value of a company’s shares of stock. It’s calculated by multiplying the company’s share price by the total number of its shares. 
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}For example, if a company has 1 million shares, and each share costs $50, the company’s market cap is $50 million. It’s a way to measure how big or valuable a company is in the stock market.
         </Text>
 
         {/* Question 1 */}
         <View style={styles.questionBox}>
-          <Text style={styles.questionText}>What is the capital of France?</Text>
+          <Text style={styles.questionText}>A company has 2 million shares, and each share is priced at $25. What is the company’s market capitalization?</Text>
           <View style={styles.optionsContainer}>
-            {["A. Berlin", "B. Paris", "C. Madrid", "D. Rome"].map((option, index) => (
+            {["A. $25 million ", "B. $50 million ", "C. $2 million ", "D. $75 million"].map((option, index) => (
               <Pressable
                 key={index}
                 onPress={() => handleOptionPress1(option.charAt(0))}
@@ -151,14 +151,14 @@ const M2 = () => {
           </View>
           {(selectedOption1 === "B" || isCorrect1) && (
             <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-              Correct! Paris is the capital of France.
+              Correct! The answer is $50 million.
             </Text>
           )}
 
           {(isCorrect1 === false) && (
             <Text style={{ ...styles.feedbackText, color: "red" }}>
-              {"\t"}Incorrect! The correct answer is ...
-              {"\n\t"}This is a placeholder explination :
+              {"\t"}Incorrect!
+              {"\n\t"}Try again!
             </Text>
           )}
         </View>
@@ -167,18 +167,18 @@ const M2 = () => {
         {/*Text 2*/}
         {isCorrect1 && (
           <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}The price of a stock changes because of supply and demand—how many people want to buy or sell it. If more people want to buy the stock, the price goes up. If more people want to sell it, the price goes down. It’s like any marketplace: prices rise when something is popular and fall when it’s not. 
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}Several things can affect demand for a stock, like how well the company is doing, news about the company or economy, and even big events around the world. For example, if a company announces record profits, more people might want to buy its stock, making the price go up. On the other hand, bad news or uncertainty can make prices drop.
           </Text>
         )}
 
         {/* Question 2 */}
         {isCorrect1 && (
           <View style={styles.questionBox}>
-            <Text style={styles.questionText}>What is the largest ocean on Earth?</Text>
+            <Text style={styles.questionText}>Why do stock prices go up and down?</Text>
             <View style={styles.optionsContainer}>
-              {["A. Atlantic Ocean", "B. Indian Ocean", "C. Arctic Ocean", "D. Pacific Ocean"].map((option, index) => (
+              {["A. Because companies change the price of their shares every day.", "B. The government sets the prices based on the economy.", "C. Stock prices always go up when a company makes a profit.", "D. Based on supply and demand—how many people want to buy or sell the stock."].map((option, index) => (
                 <Pressable
                   key={index}
                   onPress={() => handleOptionPress2(option.charAt(0))}
@@ -197,14 +197,14 @@ const M2 = () => {
             </View>
             {(selectedOption2 === "D" || isCorrect2) && (
               <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-                Correct! The Pacific Ocean is the largest ocean on Earth.
+                Correct! It is based on supply and demand—how many people want to buy or sell the stock.
               </Text>
             )}
 
             {(isCorrect2 === false) && (
             <Text style={{ ...styles.feedbackText, color: "red" }}>
-              {"\t"}Incorrect! The correct answer is ...
-              {"\n\t"}This is a placeholder explination :
+              {"\t"}Incorrect!
+              {"\n\t"}Try again!
             </Text>
           )}
           </View>
@@ -213,18 +213,18 @@ const M2 = () => {
         {/*Text 3*/}
         {isCorrect2 && (
           <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}Market capitalization changes as the share price changes because it’s calculated by multiplying the share price by the number of shares. 
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}For example, if a company has 1 million shares and the share price is $20, the market cap is $20 million. If the share price rises to $25, the market cap increases to $25 million, and if the share price falls to $15, the market cap drops to $15 million. This shows how a company’s market value moves with its stock price.
           </Text>
         )}
 
         {/*Question 3*/}
         {isCorrect2 && (
           <View style={styles.questionBox}>
-            <Text style={styles.questionText}>What is the longest river in the world?</Text>
+            <Text style={styles.questionText}>A company has 1 million shares, and its share price increases from $30 to $35. What happens to the company’s market capitalization?</Text>
             <View style={styles.optionsContainer}>
-              {["A. Amazon River", "B. Nile River", "C. Yangtze River", "D. Mississippi River"].map((option, index) => (
+              {["A. It decreases from $35 million to $30 million", "B. It increases from $30 million to $35 million", "C. It stays the same", "D. It decreases to $25 million"].map((option, index) => (
                 <Pressable
                   key={index}
                   onPress={() => handleOptionPress3(option.charAt(0))}
@@ -243,14 +243,14 @@ const M2 = () => {
             </View>
             {(selectedOption3 === "B" || isCorrect3) && (
               <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-                Correct! The Nile River is the longest river in the world.
+                Correct! It increases from $30 million to $35 million.
               </Text>
             )}
 
             {(isCorrect2 === false) && (
               <Text style={{ ...styles.feedbackText, color: "red" }}>
-                {"\t"}Incorrect! The correct answer is ...
-                {"\n\t"}This is a placeholder explination :
+                {"\t"}Incorrect!
+                {"\n\t"}Try again!
               </Text>
           )}
           </View>

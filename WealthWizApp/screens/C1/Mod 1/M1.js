@@ -121,7 +121,7 @@ const M1 = () => {
         <View style={[styles.progressBar, { width: `${getProgress() * 100}%` }]} />
       </View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <Text style={styles.ModuleText}>Stock Basics</Text>
+        <Text style={styles.ModuleText}>Stock v. Share</Text>
         <View style={styles.line}></View>
         <Text style={styles.InfoText}>
           {"\t"}A <Text style={styles.bold}>stock</Text> represents ownership in a company, giving the holder a claim to a portion of the company's assets and earnings. A <Text style={styles.bold}>stock</Text> is a single unit of ownership in that stock—so if you own shares, you own part of the company. Think of a stock as the overall pie, and shares are the individual slices of that pie. 
@@ -168,7 +168,7 @@ const M1 = () => {
         {/*Text 2*/}
         {isCorrect1 && (
           <View>
-            <Text style={styles.ModuleText}>  Stock Markets</Text>
+            <Text style={styles.ModuleText}>  Stock Market</Text>
             <Text style={styles.InfoText}>
             {"\t"}The stock market is a network of exchanges where people can buy and sell ownership in publicly traded companies through shares of stock. Companies list their shares on the market to raise money for growth, and investors trade these shares with the goal of making a profit.  
             {"\n\t"}
