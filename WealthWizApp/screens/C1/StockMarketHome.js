@@ -89,7 +89,7 @@ const StockMarketHome = () => {
             <Text style={styles.levelText}>LEVEL 3</Text>
             <TouchableOpacity
               style={[styles.button, lvl2 !== 3 && styles.disabledButton]}
-              onPress={() => navigation.navigate("M3")}
+              onPress={() => navigation.navigate("MemoryGame")}
               disabled={lvl2 !== 3}
             >
             <Image
