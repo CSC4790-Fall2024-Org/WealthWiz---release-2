@@ -22,8 +22,10 @@ import {
 } from "../GlobalStyles";
 import FormField from "../components/FormField";
 import Button from "../components/Button";
-import { auth } from "../firebaseConfig";
+import { auth, db, database } from "../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { ref, get, set } from "firebase/database";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -32,21 +34,70 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
-  
+
   const openGoogle = useCallback(() => {
-    setGoogleVisible(true);
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider);
   }, []);
 
   const closeGoogle = useCallback(() => {
     setGoogleVisible(false);
   }, []);
 
+  // Initialize or fetch user details and progress in Firestore
+  const initializeOrFetchUserDetailsFirestore = async (userId) => {
+    try {
+      const docRef = doc(db, "userProgress", userId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        // Return existing user details and progress
+        return {
+          progress: docSnap.data().progress,
+          userDetails: docSnap.data().userDetails || {}  // Fetch userDetails
+        };
+      } else {
+        // Initialize user details and progress if not exist
+        await setDoc(docRef, { progress: 0, userDetails: {} });
+        return { progress: 0, userDetails: {} };
+      }
+    } catch (error) {
+      console.error("Error fetching/initializing user details:", error);
+    }
+  };
+
+  // Initialize or fetch user details and progress in Realtime Database
+  const initializeOrFetchUserDetailsRealtime = async (userId) => {
+    try {
+      const userRef = ref(database, `userProgress/${userId}`);
+      const snapshot = await get(userRef);
+      if (snapshot.exists()) {
+        // Return existing user details and progress
+        return {
+          progress: snapshot.val().progress,
+          userDetails: snapshot.val().userDetails || {}  // Fetch userDetails
+        };
+      } else {
+        // Initialize user details and progress if not exist
+        await set(userRef, { progress: 0, userDetails: {} });
+        return { progress: 0, userDetails: {} };
+      }
+    } catch (error) {
+      console.error("Error fetching/initializing user details:", error);
+    }
+  };
+
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      const userData = await initializeOrFetchUserDetailsRealtime(user.uid);
+
       setModalMessage('Login successful!');
       setModalVisible(true);
-      navigation.navigate("HomePage");
+
+      // Navigate to HomePage and optionally pass userData
+      navigation.navigate("HomePage", { progress: userData.progress, userDetails: userData.userDetails });
     } catch (error) {
       setModalMessage(`Invalid Username/Password. Please Try Again!`);
       setModalVisible(true);
@@ -85,22 +136,22 @@ const Login = () => {
         />
 
         <View style={styles.buttonsContainer}>
-          <Button 
-            title="Login" 
+          <Button
+            title="Login"
             onPress={handleLogin}
-            buttonColor={Color.colorSeagreen} 
-            textColor={Color.black0} 
+            buttonColor={Color.colorSeagreen}
+            textColor={Color.black0}
             height={65}
             width={350}
           />
-          <Pressable style={styles.google} onPress={openGoogle}>
+          {/* <Pressable style={styles.google} onPress={openGoogle}>
             <Image
               style={styles.googleLogoIcon}
               contentFit="cover"
               source={require("../assets/google-logo.png")}
             />
             <Text style={styles.signInWith}>Sign in with Google</Text>
-          </Pressable>
+          </Pressable> */}
           <View style={styles.dontHaveAccount}>
             <Text style={styles.dontHaveAn}>Don’t have an account?</Text>
             <Pressable onPress={() => navigation.navigate("Register1")}>
@@ -165,7 +216,6 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     alignItems: 'center',
   },
-
   google: {
     flexDirection: "row",
     alignItems: "center",
@@ -184,7 +234,7 @@ const styles = StyleSheet.create({
 
   dontHaveAccount: {
     flexDirection: "row",
-    marginTop: 150,
+    marginTop: 5,
     alignItems: "center",
   },
   dontHaveAn: {
@@ -218,13 +268,18 @@ const styles = StyleSheet.create({
   modalContainer: {
     width: 300,
     padding: 20,
-    backgroundColor: Color.white,
+    backgroundColor: "rgba(60, 60, 67, 0.6)",
     borderRadius: 10,
     alignItems: "center",
+    borderRadius: 10,
+    borderWidth: 5,
+    borderColor: Color.colorSeagreen
   },
   modalMessage: {
     marginBottom: 20,
     textAlign: "center",
+    color: Color.black0,
+    fontSize: 20,
   },
   modalButton: {
     color: Color.colorBlue,

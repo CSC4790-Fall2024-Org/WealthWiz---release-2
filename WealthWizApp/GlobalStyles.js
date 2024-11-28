@@ -18,6 +18,9 @@ export const FontSize = {
   extraSmallTextRegular_size: 10,
   size_mini: 15,
   size_mid: 17,
+  size_xs: 12,
+  size_5xl: 24,
+  size_xl: 20,
 };
 /* Colors */
 export const Color = {
@@ -54,6 +57,11 @@ export const Color = {
   colorPalegoldenrod: "#ffe6a1",
   colorLavender: "#eed9f5",
   colorCrimson: "#ed0131",
+  colorWhite: "#fff",
+  colorDarkslategray: "#273958",
+  colorMediumspringgreen: "#2fdb81",
+  colorGold: "#fcd227",
+  colorSeashell: "#fff5ee",
 };
 /* Gaps */
 export const Gap = {
@@ -77,6 +85,7 @@ export const Padding = {
   p_5xl: 24,
   p_24xl: 43,
   p_8xs: 5,
+  p_22xl: 41,
 };
 /* border radiuses */
 export const Border = {
@@ -88,4 +97,6 @@ export const Border = {
   br_11xs: 2,
   br_7xs: 6,
   br_9xs: 4,
+  br_base: 16,
+  br_mini: 15,
 };
