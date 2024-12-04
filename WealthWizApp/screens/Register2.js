@@ -47,8 +47,8 @@ const Register2 = () => {
       setModalVisible(true);
       navigation.navigate("HomePage");
     } catch (error) {
-      setModalMessage(`Error: ${error.message}`);
-      setModalVisible(true);
+      //setModalMessage(`Error: ${error.message}`);
+      //setModalVisible(true);
     }
 
     // try {
@@ -144,13 +144,18 @@ const styles = StyleSheet.create({
   modalContainer: {
     width: 300,
     padding: 20,
-    backgroundColor: Color.white,
+    backgroundColor: "rgba(60, 60, 67, 0.6)",
     borderRadius: 10,
     alignItems: "center",
+    borderRadius: 10,
+    borderWidth: 5,
+    borderColor: Color.colorSeagreen
   },
   modalMessage: {
     marginBottom: 20,
     textAlign: "center",
+    color: Color.black0,
+    fontSize: 20,
   },
   modalButton: {
     color: Color.colorBlue,
