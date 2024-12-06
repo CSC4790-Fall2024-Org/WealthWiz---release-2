@@ -20,6 +20,7 @@ const SMQuiz = () => {
   const [isCorrect4, setIsCorrect4] = useState(false);
   const [isCorrect5, setIsCorrect5] = useState(false);
   const [correct, setCorrect] = useState(0);
+  const [coins, setCoins] = useState(0);
 
   useEffect(() => {
     const loadProgress = async () => {
@@ -30,7 +31,9 @@ const SMQuiz = () => {
 
         if (userDoc.exists()) {
           const progress = userDoc.data().progress?.smquiz || 0;
+          const userCoins = userDoc.data().coins || 0;
           setCorrect(progress);
+          setCoins(userCoins);
 
           if (progress >= 1) {
             setIsCorrect1(true);
@@ -58,15 +61,18 @@ const SMQuiz = () => {
     loadProgress();
   }, []);
 
-  const updateUserProgress = async (progress) => {
+  const updateUserProgress = async (progress, coinsEarned = 0) => {
     const user = auth.currentUser;
     if (user) {
       const userDocRef = doc(db, "users", user.uid);
 
       try {
+        const newCoins = coins + coinsEarned;
+        setCoins(newCoins);
+
         await setDoc(
           userDocRef,
-          { progress: { smquiz: progress } },
+          { progress: { smquiz: progress }, coins: newCoins },
           { merge: true }
         );
       } catch (error) {
@@ -76,11 +82,12 @@ const SMQuiz = () => {
   };
 
   const updateCorrectCount = (isCorrect, setIsCorrect) => {
-    if (!isCorrect) {
+    if (!isCorrect || isCorrect === null) {
       setIsCorrect(true);
       const newCorrect = correct + 1;
       setCorrect(newCorrect);
-      updateUserProgress(newCorrect);
+      const coinsEarned = 1
+      updateUserProgress(newCorrect, coinsEarned);
     }
   };
 
