@@ -16,6 +16,7 @@ const M2 = () => {
   const [isCorrect2, setIsCorrect2] = useState(null);
   const [isCorrect3, setIsCorrect3] = useState(null);
   const [correct, setCorrect] = useState(0);
+  const [coins, setCoins] = useState(0);
 
   useEffect(() => {
     const loadProgress = async () => {
@@ -26,7 +27,9 @@ const M2 = () => {
 
         if (userDoc.exists()) {
           const progress = userDoc.data().progress?.module2 || 0;
+          const userCoins = userDoc.data().coins || 0;
           setCorrect(progress);
+          setCoins(userCoins);
 
           if (progress >= 1) {
             setIsCorrect1(true);
@@ -47,15 +50,18 @@ const M2 = () => {
     loadProgress();
   }, []);
 
-  const updateUserProgress = async (progress) => {
+  const updateUserProgress = async (progress, coinsEarned = 0) => {
     const user = auth.currentUser;
     if (user) {
       const userDocRef = doc(db, "users", user.uid);
 
       try {
+        const newCoins = coins + coinsEarned;
+        setCoins(newCoins);
+
         await setDoc(
           userDocRef,
-          { progress: { module2: progress } },
+          { progress: { module2: progress }, coins: newCoins },
           { merge: true }
         );
       } catch (error) {
@@ -69,7 +75,8 @@ const M2 = () => {
       setIsCorrect(true);
       const newCorrect = correct + 1;
       setCorrect(newCorrect);
-      updateUserProgress(newCorrect);
+      const coinsEarned = 1
+      updateUserProgress(newCorrect, coinsEarned);
     }
   };
 

@@ -55,7 +55,10 @@ const M1 = () => {
       try {
         await setDoc(
           userDocRef,
-          { progress: { module1: progress } },
+          {
+            progress: { module1: progress },
+            coins: progress
+          },
           { merge: true }
         );
       } catch (error) {
