@@ -144,16 +144,16 @@ const SMQuiz = () => {
         <Text style={styles.ModuleText}>Stock Market Quiz</Text>
         <View style={styles.line}></View>
         <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}Question 1
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}
         </Text>
 
         {/* Question 1 */}
         <View style={styles.questionBox}>
-          <Text style={styles.questionText}>What is the capital of France?</Text>
+          <Text style={styles.questionText}>What is the difference between a stock and a share?</Text>
           <View style={styles.optionsContainer}>
-            {["A. Berlin", "B. Paris", "C. Madrid", "D. Rome"].map((option, index) => (
+            {["A. A stock is a single unit of ownership, and a share is ownership in multiple companies.", "B. A stock represents ownership in a company, and a share is a single unit of that ownership.", "C. A stock and a share are the same thing with no differences.", "D. A stock is a type of loan to a company, while a share is ownership in the company."].map((option, index) => (
               <Pressable
                 key={index}
                 onPress={() => handleOptionPress1(option.charAt(0))}
@@ -171,7 +171,7 @@ const SMQuiz = () => {
           </View>
           {(selectedOption1 === "B" || isCorrect1) && (
             <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-              Correct! Paris is the capital of France.
+              Correct!
             </Text>
           )}
         </View>
@@ -180,18 +180,18 @@ const SMQuiz = () => {
         {/*Text 2*/}
         {isCorrect1 && (
           <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}Question 2
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}
           </Text>
         )}
 
         {/* Question 2 */}
         {isCorrect1 && (
           <View style={styles.questionBox}>
-            <Text style={styles.questionText}>What is the largest ocean on Earth?</Text>
+            <Text style={styles.questionText}>What is the difference between a public company and an index?</Text>
             <View style={styles.optionsContainer}>
-              {["A. Atlantic Ocean", "B. Indian Ocean", "C. Arctic Ocean", "D. Pacific Ocean"].map((option, index) => (
+              {["A. A public company sells products directly to the public, while an index tracks the prices of those products.", "B. A public company is managed by the government, while an index is run by private investors.", "C. A public company sets stock prices, while an index determines which companies can sell shares.", "D. A public company offers its stock to the public, while an index tracks the performance of groups of stocks."].map((option, index) => (
                 <Pressable
                   key={index}
                   onPress={() => handleOptionPress2(option.charAt(0))}
@@ -210,7 +210,7 @@ const SMQuiz = () => {
             </View>
             {(selectedOption2 === "D" || isCorrect2) && (
               <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-                Correct! The Pacific Ocean is the largest ocean on Earth.
+                Correct!
               </Text>
             )}
           </View>
@@ -219,18 +219,18 @@ const SMQuiz = () => {
         {/*Text 3*/}
         {isCorrect2 && (
           <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}Question 3 
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}
           </Text>
         )}
 
         {/*Question 3*/}
         {isCorrect2 && (
           <View style={styles.questionBox}>
-            <Text style={styles.questionText}>What is the longest river in the world?</Text>
+            <Text style={styles.questionText}>Why do stock prices go up and down?</Text>
             <View style={styles.optionsContainer}>
-              {["A. Amazon River", "B. Nile River", "C. Yangtze River", "D. Mississippi River"].map((option, index) => (
+              {["A. Because companies change the price of their shares every day.", "B. Based on supply and demand—how many people want to buy or sell the stock.", "C. Stock prices always go up when a company makes a profit.", "D. The government sets the prices based on the economy."].map((option, index) => (
                 <Pressable
                   key={index}
                   onPress={() => handleOptionPress3(option.charAt(0))}
@@ -249,7 +249,7 @@ const SMQuiz = () => {
             </View>
             {(selectedOption3 === "B" || isCorrect3) && (
               <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-                Correct! The Nile River is the longest river in the world.
+                Correct!
               </Text>
             )}
           </View>
@@ -258,18 +258,18 @@ const SMQuiz = () => {
         {/*Text 4*/}
         {isCorrect3 && (
           <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}Question 4
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}
           </Text>
         )}
 
         {/*Question 4*/}
         {isCorrect3 && (
           <View style={styles.questionBox}>
-            <Text style={styles.questionText}>What is the smallest planet in the Solar System?</Text>
+            <Text style={styles.questionText}>What does market volatility indicate? </Text>
             <View style={styles.optionsContainer}>
-              {["A. Venus", "B. Mars", "C. Mercury", "D. Earth"].map((option, index) => (
+              {["A. That stock prices are changing slowly and predictably.", "B. That the market is completely risk-free. ", "C. That stock prices are moving quickly and unpredictably.", "D. That all stocks in the market are losing value."].map((option, index) => (
                 <Pressable
                   key={index}
                   onPress={() => handleOptionPress4(option.charAt(0))}
@@ -288,7 +288,7 @@ const SMQuiz = () => {
             </View>
             {(selectedOption4 === "C" || isCorrect4) && (
               <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-                Correct! Mercury is the smallest planet in the Solar System.
+                Correct!
               </Text>
             )}
           </View>
@@ -298,18 +298,18 @@ const SMQuiz = () => {
         {/*Text 5*/}
         {isCorrect4 && (
           <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}Question 5
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}
           </Text>
         )}
 
         {/*Question 5*/}
         {isCorrect4 && (
           <View style={styles.questionBox}>
-            <Text style={styles.questionText}>Which element has the chemical symbol O?</Text>
+            <Text style={styles.questionText}>Which of the following is a best practice for investing?</Text>
             <View style={styles.optionsContainer}>
-              {["A. Oxygen", "B. Gold", "C. Osmium", "D. Hydrogen"].map((option, index) => (
+              {["A. Investing regularly, even when the market goes up and down.", "B. Putting all your money into one stock to maximize returns.", "C. Selling your investments every time the market dips.", "D. Only investing in companies with the highest stock prices."].map((option, index) => (
                 <Pressable
                   key={index}
                   onPress={() => handleOptionPress5(option.charAt(0))}
@@ -328,7 +328,7 @@ const SMQuiz = () => {
             </View>
             {(selectedOption5 === "A" || isCorrect5) && (
               <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-                Correct! Oxygen has the chemical symbol O.
+                Correct!
               </Text>
             )}
           </View>

@@ -121,19 +121,19 @@ const M4 = () => {
         <View style={[styles.progressBar, { width: `${getProgress() * 100}%` }]} />
       </View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <Text style={styles.ModuleText}>Module 4 Course</Text>
+        <Text style={styles.ModuleText}>Investing Best Practices</Text>
         <View style={styles.line}></View>
         <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}Diversification is important in investing because it helps reduce risk. It means spreading your investments across different types of assets, industries, or companies so that your portfolio isn’t too dependent on the success or failure of any single investment.  
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}For example, instead of putting all your money into one company’s stock, you could invest in stocks from different industries (like technology, healthcare, and retail) or add bonds and mutual funds. This way, if one investment performs poorly, others may do well, helping to balance out your overall returns and protect your money. It’s like not putting all your eggs in one basket.
         </Text>
 
         {/* Question 1 */}
         <View style={styles.questionBox}>
-          <Text style={styles.questionText}>What is the capital of France?</Text>
+          <Text style={styles.questionText}>Why is diversification important in investing?</Text>
           <View style={styles.optionsContainer}>
-            {["A. Berlin", "B. Paris", "C. Madrid", "D. Rome"].map((option, index) => (
+            {["A. It guarantees higher returns on all investments.", "B. It reduces risk by spreading investments across different assets or industries.", "C. It eliminates all risk in the stock market.", "D. It ensures that all investments grow at the same rate."].map((option, index) => (
               <Pressable
                 key={index}
                 onPress={() => handleOptionPress1(option.charAt(0))}
@@ -151,13 +151,13 @@ const M4 = () => {
           </View>
           {(selectedOption1 === "B" || isCorrect1) && (
             <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-              Correct! Paris is the capital of France.
+              Correct!
             </Text>
           )}
           {(isCorrect1 === false) && (
             <Text style={{ ...styles.feedbackText, color: "red" }}>
-              {"\t"}Incorrect! The correct answer is ...
-              {"\n\t"}This is a placeholder explination :
+              {"\t"}Incorrect!
+              {"\n\t"}
             </Text>
           )}
         </View>
@@ -166,18 +166,18 @@ const M4 = () => {
         {/*Text 2*/}
         {isCorrect1 && (
           <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}To evaluate risk when buying a stock, start by looking at the company itself. Is it performing well, making profits, and growing steadily? A strong, stable company is less risky than one with financial struggles. Also, check how much the stock price moves up and down (this is called volatility). Stocks with big price swings can bring high rewards but are riskier.
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}Next, think about the bigger picture. Is the industry the company belongs to growing or shrinking? For example, technology can be exciting but more unpredictable, while industries like utilities tend to be safer. Finally, consider your own comfort with risk. If you’re not okay with losing money in the short term, focus on stable stocks. By understanding these factors, you can make smarter investment choices.
           </Text>
         )}
 
         {/* Question 2 */}
         {isCorrect1 && (
           <View style={styles.questionBox}>
-            <Text style={styles.questionText}>What is the largest ocean on Earth?</Text>
+            <Text style={styles.questionText}>Which of the following helps you evaluate the risk of buying a stock?</Text>
             <View style={styles.optionsContainer}>
-              {["A. Atlantic Ocean", "B. Indian Ocean", "C. Arctic Ocean", "D. Pacific Ocean"].map((option, index) => (
+              {["A. Watching how quickly the stock market closes each day.", "B. Focusing only on stocks with the highest prices.", "C. Ignoring industry trends and only looking at the stock price.", "D. Checking the company’s earnings and stability."].map((option, index) => (
                 <Pressable
                   key={index}
                   onPress={() => handleOptionPress2(option.charAt(0))}
@@ -196,13 +196,13 @@ const M4 = () => {
             </View>
             {(selectedOption2 === "D" || isCorrect2) && (
               <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-                Correct! The Pacific Ocean is the largest ocean on Earth.
+                Correct!
               </Text>
             )}
             {(isCorrect2 === false) && (
             <Text style={{ ...styles.feedbackText, color: "red" }}>
-              {"\t"}Incorrect! The correct answer is ...
-              {"\n\t"}This is a placeholder explination :
+              {"\t"}Incorrect!
+              {"\n\t"}
             </Text>
           )}
           </View>
@@ -211,18 +211,18 @@ const M4 = () => {
         {/*Text 3*/}
         {isCorrect2 && (
           <Text style={styles.InfoText}>
-          {"\t"}This is placeholder text serving as a filler for the content yet to be added. 
+          {"\t"}A smart way to invest is to do it regularly, like putting a set amount of money into the market every month. This strategy, called dollar-cost averaging, helps balance out the ups and downs of stock prices. A good starting point is investing in index funds, which are simple, low-cost investments that track the performance of the whole market, like the S&P 500. They let you own a small piece of many companies, making your investment less risky. 
           {"\n\t"}
-          {"\n\t"}Its purpose is to illustrate the layout and visual structure of a document or webpage without the distraction of meaningful content.
+          {"\n\t"}It’s also important to think long-term and not panic when the market goes down. The stock market has ups and downs, but over time, it generally grows. Diversifying your investments—spreading your money across different companies and industries—can further reduce risk. Finally, avoid making emotional decisions, like selling out of fear or chasing quick profits, and stick to your plan for steady, long-term growth.
           </Text>
         )}
 
         {/*Question 3*/}
         {isCorrect2 && (
           <View style={styles.questionBox}>
-            <Text style={styles.questionText}>What is the longest river in the world?</Text>
+            <Text style={styles.questionText}>Which of the following is a best practice for investing?</Text>
             <View style={styles.optionsContainer}>
-              {["A. Amazon River", "B. Nile River", "C. Yangtze River", "D. Mississippi River"].map((option, index) => (
+              {["A. Putting all your money into one stock to maximize returns. ", "B. Investing regularly, even when the market goes up and down.", "C. Selling your investments every time the market dips.", "D. Only investing in companies with the highest stock prices."].map((option, index) => (
                 <Pressable
                   key={index}
                   onPress={() => handleOptionPress3(option.charAt(0))}
@@ -241,13 +241,13 @@ const M4 = () => {
             </View>
             {(selectedOption3 === "B" || isCorrect3) && (
               <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
-                Correct! The Nile River is the longest river in the world.
+                Correct!
               </Text>
             )}
             {(isCorrect3 === false) && (
             <Text style={{ ...styles.feedbackText, color: "red" }}>
-              {"\t"}Incorrect! The correct answer is ...
-              {"\n\t"}This is a placeholder explination :
+              {"\t"}Incorrect!
+              {"\n\t"}
             </Text>
           )}
           </View>

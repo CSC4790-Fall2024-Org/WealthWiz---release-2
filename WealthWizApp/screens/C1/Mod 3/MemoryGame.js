@@ -9,9 +9,9 @@ import { auth, db } from "../../../firebaseConfig";
 
 const cardImages = [
   { name: "Card1", label: "Stock", backgroundColor: "#708090", matched: false },
-  { name: "Card1", label: "Represetation of a fraction of ownership in a company", backgroundColor: "#708090", matched: false },
+  { name: "Card1", label: "A security that represents ownership in a corporation", backgroundColor: "#708090", matched: false },
   { name: "Card2", label: "Share", backgroundColor: "#708090", matched: false },
-  { name: "Card2", label: "Units of stocks that represent ownership", backgroundColor: "#708090", matched: false },
+  { name: "Card2", label: "A single unit of a stock", backgroundColor: "#708090", matched: false },
   { name: "Card3", label: "Index", backgroundColor: "#708090", matched: false },
   { name: "Card3", label: "A tool for measuring change in a group of represent-ative data", backgroundColor: "#708090", matched: false },
   { name: "Card4", label: "Market Capitalizat-ion", backgroundColor: "#708090", matched: false },
