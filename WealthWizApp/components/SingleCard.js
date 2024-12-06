@@ -32,7 +32,6 @@ export default function SingleCard({ card, handleChoice, flipped, disabled }) {
 
   return (
     <View style={styles.card}>
-      {/* Front of the card (cover image) */}
       <Animated.View
         style={[
           styles.cardFace,
@@ -41,11 +40,9 @@ export default function SingleCard({ card, handleChoice, flipped, disabled }) {
         ]}
       >
         <TouchableOpacity onPress={handleClick} disabled={disabled}>
-          <Image source={require("../assets/cover.png")} style={styles.coverImage} />
+          <Image source={require("../assets/cover.png")} style={styles.coverImage } />
         </TouchableOpacity>
       </Animated.View>
-
-      {/* Back of the card (label and background color) */}
       <Animated.View
         style={[
           styles.cardFace,
