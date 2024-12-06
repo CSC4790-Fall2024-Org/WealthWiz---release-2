@@ -34,6 +34,7 @@ const MemoryGame = () => {
   const [checkMatch, setCheckMatch] = useState(false)
   const [highScore, setHighScore] = useState(null);
   const [showStartModal, setShowStartModal] = useState(true)
+  const [showNewGameModal, setShowNewGameModal] = useState(false)
   
 
   const updateUserProgress = async (progress) => {
@@ -89,7 +90,7 @@ const MemoryGame = () => {
             )
           );
           resetTurn()
-        }, 1000);
+        }, 500);
       } else {
         setTimeout(resetTurn, 1000);
         resetTurn()
@@ -113,7 +114,7 @@ const MemoryGame = () => {
       }
       const timer = setTimeout(() => {
         setShowWinModal(false); // Hide the modal
-      }, 2000); // Show the modal for 2 seconds
+      }, 5000); // Show the modal for 2 seconds
   
       return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
     }
@@ -134,7 +135,7 @@ const MemoryGame = () => {
   const handleNoMatch = () => {
     resetTurn(); 
   };
-  
+
   return (
     <View style={styles.container}>
       <Modal
@@ -185,7 +186,34 @@ const MemoryGame = () => {
           disabled={!choiceOne || !choiceTwo}>
           <Text style={styles.buttonText}> Match      </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={shuffleCards}>
+
+        <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showNewGameModal}
+        onRequestClose={() => setShowNewGameModal(false)}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={[styles.modalText, {marginBottom: 20}]}>Do you want to start a new game?</Text>
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => {
+                setShowNewGameModal(false); 
+                shuffleCards(); 
+              }}>
+              <Text style={[styles.modalButton, {padding: 2}]}>Start a New Game</Text>
+            </TouchableOpacity>
+            <Text>          </Text>
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => setShowNewGameModal(false)}>
+              <Text style={[styles.modalButton, {padding: 2}]}>Keep playing!</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        </Modal>
+
+        <TouchableOpacity style={styles.button} onPress={() => setShowNewGameModal(true)}>
         <Text style={styles.buttonText}>New Game</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -203,6 +231,7 @@ const MemoryGame = () => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalText}>You Win!</Text>
+            <Text style={[styles.modalText, {marginTop: 10}, {textAlign: "center"}]}>Make sure to check the leaderboard to see how you rank!</Text>
           </View>
         </View>
       </Modal>
@@ -288,9 +317,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   modalButton: {
+    fontSize: 18,
     fontWeight: "bold",
     color: Color.black0,
-    padding: 10,
+    padding: 8,
     borderRadius: 8,
     backgroundColor: Color.colorSeagreen,
   },
