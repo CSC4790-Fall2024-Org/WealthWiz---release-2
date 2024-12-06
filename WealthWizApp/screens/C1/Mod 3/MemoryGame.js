@@ -9,9 +9,9 @@ import { auth, db } from "../../../firebaseConfig";
 
 const cardImages = [
   { name: "Card1", label: "Stock", backgroundColor: "#708090", matched: false },
-  { name: "Card1", label: "A security that represents ownership in a corporation", backgroundColor: "#708090", matched: false },
-  { name: "Card2", label: "Share", backgroundColor: "#708090", matched: false },
-  { name: "Card2", label: "A single unit of a stock", backgroundColor: "#708090", matched: false },
+  { name: "Card1", label: "A security that represents ownership in a corpo- ration", backgroundColor: "#708090", matched: false },
+  { name: "Card2", label: "Shares", backgroundColor: "#708090", matched: false },
+  { name: "Card2", label: "Units of equity ownership in a corpo- ration", backgroundColor: "#708090", matched: false },
   { name: "Card3", label: "Index", backgroundColor: "#708090", matched: false },
   { name: "Card3", label: "A tool for measuring change in a group of represent-ative data", backgroundColor: "#708090", matched: false },
   { name: "Card4", label: "Market Capitalizat-ion", backgroundColor: "#708090", matched: false },
@@ -161,10 +161,7 @@ const MemoryGame = () => {
 
       <NavBar1 />
       <Text style={styles.title}>Wealth of Memory</Text>
-      <View style={styles.scoreContainer}>
         <Text style={styles.turns}>Score: {turns}</Text>
-        <Text style={styles.turns}>High Score: {highScore !== null ? highScore : "--"}</Text>
-      </View>
       <FlatList
         data={cards}
         numColumns={3}
@@ -231,7 +228,7 @@ const MemoryGame = () => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalText}>You Win!</Text>
-            <Text style={[styles.modalText, {marginTop: 10}, {textAlign: "center"}]}>Make sure to check the leaderboard to see how you rank!</Text>
+            <Text style={[styles.modalText, {marginTop: 10}, {textAlign: "center"}]}>Your score was : {turns}</Text>
           </View>
         </View>
       </Modal>
