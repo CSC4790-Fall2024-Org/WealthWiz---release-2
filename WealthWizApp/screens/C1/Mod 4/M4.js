@@ -163,8 +163,8 @@ const M4 = () => {
           )}
           {(isCorrect1 === false) && (
             <Text style={{ ...styles.feedbackText, color: "red" }}>
-              {"\t"}Incorrect!
-              {"\n\t"}
+            {"\t"}Incorrect! 
+            {"\n\t"}Try again!
             </Text>
           )}
         </View>
@@ -208,8 +208,8 @@ const M4 = () => {
             )}
             {(isCorrect2 === false) && (
             <Text style={{ ...styles.feedbackText, color: "red" }}>
-              {"\t"}Incorrect!
-              {"\n\t"}
+            {"\t"}Incorrect! 
+            {"\n\t"}Try again!
             </Text>
           )}
           </View>
@@ -253,8 +253,8 @@ const M4 = () => {
             )}
             {(isCorrect3 === false) && (
             <Text style={{ ...styles.feedbackText, color: "red" }}>
-              {"\t"}Incorrect!
-              {"\n\t"}
+            {"\t"}Incorrect! 
+            {"\n\t"}Try again!
             </Text>
           )}
           </View>
