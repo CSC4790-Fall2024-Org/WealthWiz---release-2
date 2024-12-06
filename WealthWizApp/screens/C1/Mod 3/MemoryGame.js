@@ -35,24 +35,73 @@ const MemoryGame = () => {
   const [highScore, setHighScore] = useState(null);
   const [showStartModal, setShowStartModal] = useState(true)
   const [showNewGameModal, setShowNewGameModal] = useState(false)
-  
+  const [coins, setCoins] = useState(0);
+  const [correct, setCorrect] = useState(0);
 
-  const updateUserProgress = async (progress) => {
+  useEffect(() => {
+    const loadProgress = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (userDoc.exists()) {
+          const progress = userDoc.data().progress?.module3 || 0;
+          const userCoins = userDoc.data().coins || 0;
+          setCorrect(progress);
+          setCoins(userCoins);
+        }
+      }
+    };
+
+    loadProgress();
+  }, []);
+
+  // const updateUserProgress = async (progress, coinsEarned = 0) => {
+  //   const user = auth.currentUser;
+  //   if (user) {
+  //     const userDocRef = doc(db, "users", user.uid);
+
+  //     try {
+  //       const newCoins = coins + coinsEarned;
+  //       setCoins(newCoins);
+
+  //       await setDoc(
+  //         userDocRef,
+  //         { progress: { module3: progress }, coins: newCoins },
+  //         { merge: true }
+  //       );
+  //     } catch (error) {
+  //       console.error("Error updating progress:", error);
+  //     }
+  //   }
+  // };
+
+  const updateUserProgress = async (progress, coinsEarned = 0) => {
     const user = auth.currentUser;
     if (user) {
       const userDocRef = doc(db, "users", user.uid);
   
       try {
-        await setDoc(
-          userDocRef,
-          { progress: { module3: progress } },
-          { merge: true }
-        );
+        setCoins((prevCoins) => {
+          const updatedCoins = prevCoins + coinsEarned;
+  
+          // Persist the updated coins to Firestore
+          setDoc(
+            userDocRef,
+            { progress: { module3: progress }, coins: updatedCoins },
+            { merge: true }
+          ).catch((error) => {
+            console.error("Error updating progress:", error);
+          });
+  
+          return updatedCoins; // Update local state
+        });
       } catch (error) {
         console.error("Error updating progress:", error);
       }
     }
-  };
+  };  
 
   useEffect(() => {
     shuffleCards();
@@ -126,8 +175,11 @@ const MemoryGame = () => {
         navigation.goBack(); // Navigate back 2 seconds after modal is hidden
       }, 1000);
 
-      updateUserProgress(3);
-  
+      const newCorrect = correct + 3;
+      setCorrect(newCorrect);
+      const coinsEarned = 3
+      updateUserProgress(newCorrect, coinsEarned);
+
       return () => clearTimeout(navigationTimer); // Cleanup the timer if the component unmounts
     }
   }, [showWinModal]);  

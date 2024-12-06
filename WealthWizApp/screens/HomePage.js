@@ -22,7 +22,7 @@ const HomePage = () => {
       const userDoc = await getDoc(userDocRef);
 
       if (userDoc.exists()) {
-        const coinsAmount = userDoc.data().coins || {};
+        const coinsAmount = userDoc.data().coins || 0;
         setcoins(coinsAmount);
         setUsername(userDoc.data().username || '');  // Set username from Firestore
       }

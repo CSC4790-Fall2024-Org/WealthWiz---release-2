@@ -123,9 +123,6 @@ const ProfilePage = () => {
               <Text style={styles.email}>{item.email}</Text>
               <Text style={styles.username}>{item.username || "No username available"}</Text>
             </View>
-            <TouchableOpacity style={styles.addButton}>
-              <Text style={styles.addButtonText}>+</Text>
-            </TouchableOpacity>
           </View>
         )}
       />

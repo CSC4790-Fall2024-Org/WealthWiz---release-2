@@ -1,38 +1,101 @@
 import React, { useState, useCallback } from "react";
-import { Text, StyleSheet, View, ScrollView, StatusBar } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 import { Image } from "expo-image";
-import { FontSize, Color, FontFamily, Border } from "../GlobalStyles";
-import Button from "../components/Button";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
-import Menu from "../components/Menu";
-import { doc, getDoc } from "firebase/firestore";
+import { useFocusEffect } from "@react-navigation/native";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebaseConfig";
+import Button from "../components/Button";
+import Menu from "../components/Menu";
+import { FontSize, Color, FontFamily } from "../GlobalStyles";
 
 const Achievements = () => { 
   const [walletPressed, setWalletPressed] = useState(false);
   const [briefcasePressed, setBriefcasePressed] = useState(false);
   const [internPressed, setInternPressed] = useState(false);
   const [ceoPressed, setCeoPressed] = useState(false);
-  const [coins, setcoins] = useState(0);
+  const [coins, setCoins] = useState(0);
 
+  // Load user progress (coins) from Firebase
   const loadProgress = async () => {
     const user = auth.currentUser;
     if (user) {
       const userDocRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userDocRef);
       if (userDoc.exists()) {
-        const coinsAmount = userDoc.data().coins || {};
-        setcoins(coinsAmount);
+        const coinsAmount = userDoc.data().coins || 0;
+        setCoins(coinsAmount);
       }
     }
   };
 
+  // // Handle item purchase
+  // const handlePurchase = async (requiredCoins, setPressed) => {
+  //   if (coins >= requiredCoins) {
+  //     const updatedCoins = coins - requiredCoins;
+  //     setCoins(updatedCoins); // Update local state immediately
+  //     await updateCoins(updatedCoins); // Persist the updated value to Firebase
+  //     setPressed(true); // Mark the item as purchased
+  //   }
+  // };
+
+  // Handle item purchase
+  const handlePurchase = async (requiredCoins, setPressed, imageName) => {
+    if (coins >= requiredCoins) {
+      const updatedCoins = coins - requiredCoins;
+      setCoins(updatedCoins); // Update local state immediately
+      await updateCoins(updatedCoins); // Persist the updated value to Firebase
+      await storePurchasedItem(imageName); // Store the purchased item in Firebase
+      setPressed(true); // Mark the item as purchased
+    }
+  };
+
+  // Update the user's coins in Firebase
+  const updateCoins = async (newCoins) => {
+    const user = auth.currentUser;
+    if (user) {
+      const userDocRef = doc(db, "users", user.uid);
+      try {
+        await setDoc(
+          userDocRef,
+          { coins: newCoins },
+          { merge: true } // Merge to avoid overwriting other fields
+        );
+      } catch (error) {
+        console.error("Error updating coins:", error);
+      }
+    }
+  };
+
+  // Store purchased item in Firebase
+  const storePurchasedItem = async (imageName) => {
+    const user = auth.currentUser;
+    if (user) {
+      const userDocRef = doc(db, "users", user.uid);
+      try {
+        await setDoc(
+          userDocRef,
+          {
+            purchasedItems: {
+              [imageName]: true, // Mark the item as purchased (or store just the name if needed)
+            },
+          },
+          { merge: true } // Merge to avoid overwriting other fields
+        );
+      } catch (error) {
+        console.error("Error storing purchased item:", error);
+      }
+    }
+  };
+
+
+  // Load user data on focus
   useFocusEffect(
     useCallback(() => {
       loadProgress();
     }, [])
   );
 
+  // Get button styling and text
   const getButtonColor = (requiredCoins, isPressed) => {
     if (isPressed) {
       return "#2FDB81";
@@ -41,14 +104,7 @@ const Achievements = () => {
   };
 
   const getButtonText = (requiredCoins, isPressed) => {
-    return isPressed ? "PURCHASED" : `${100 * requiredCoins} coins`; // Show 'PURCHASED' after press
-  };
-
-  const handlePurchase = (requiredCoins, setPressed) => {
-    if (coins >= requiredCoins) {
-      setcoins((prevCoins) => prevCoins - requiredCoins);
-      setPressed(true);
-    }
+    return isPressed ? "PURCHASED" : `${100 * requiredCoins} coins`;
   };
 
   return (
@@ -75,7 +131,7 @@ const Achievements = () => {
               </View>
               <Button
                 title={getButtonText(1, walletPressed)}
-                onPress={() => handlePurchase(1, setWalletPressed)}
+                onPress={() => handlePurchase(1, setWalletPressed, "wallet.png")}
                 buttonColor={getButtonColor(1, walletPressed)}
                 textColor={Color.black0}
                 height={40}
@@ -100,7 +156,7 @@ const Achievements = () => {
               </View>
               <Button
                 title={getButtonText(5, briefcasePressed)}
-                onPress={() => handlePurchase(5, setBriefcasePressed)}
+                onPress={() => handlePurchase(5, setBriefcasePressed, "briefcase.png")}
                 buttonColor={getButtonColor(5, briefcasePressed)}
                 textColor={Color.black0}
                 height={40}
@@ -125,7 +181,7 @@ const Achievements = () => {
               </View>
               <Button
                 title={getButtonText(10, internPressed)}
-                onPress={() => handlePurchase(10, setInternPressed)}
+                onPress={() => handlePurchase(10, setInternPressed, "suit.png")}
                 buttonColor={getButtonColor(10, internPressed)}
                 textColor={Color.black0}
                 height={40}
@@ -150,7 +206,7 @@ const Achievements = () => {
               </View>
               <Button
                 title={getButtonText(50, ceoPressed)}
-                onPress={() => handlePurchase(50, setCeoPressed)}
+                onPress={() => handlePurchase(50, setCeoPressed, "suit1.png")}
                 buttonColor={getButtonColor(50, ceoPressed)}
                 textColor={Color.black0}
                 height={40}
