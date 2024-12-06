@@ -21,8 +21,8 @@ const Achievements = () => {
       const userDocRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userDocRef);
       if (userDoc.exists()) {
-        const progress = userDoc.data().progress || {};
-        setcoins((progress.smquiz || 0) + (progress.module4 || 0) + (progress.module3 || 0) + (progress.module2 || 0) + (progress.module1 || 0));
+        const coinsAmount = userDoc.data().coins || {};
+        setcoins(coinsAmount);
       }
     }
   };
