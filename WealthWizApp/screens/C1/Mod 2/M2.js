@@ -30,7 +30,7 @@ const M2 = () => {
 
           if (progress >= 1) {
             setIsCorrect1(true);
-            setSelectedOption1("B");
+            setSelectedOption1("A");
           }
           if (progress >= 2) {
             setIsCorrect2(true);
@@ -38,7 +38,7 @@ const M2 = () => {
           }
           if (progress >= 3) {
             setIsCorrect3(true);
-            setSelectedOption3("B");
+            setSelectedOption3("C");
           }
         }
       }
@@ -80,7 +80,7 @@ const M2 = () => {
   const handleOptionPress1 = (option) => {
     if (!isCorrect1) {
       setSelectedOption1(option);
-      if (option === "B") {
+      if (option === "A") {
         updateCorrectCount(isCorrect1, setIsCorrect1);
       }
       else {
@@ -104,7 +104,7 @@ const M2 = () => {
   const handleOptionPress3 = (option) => {
     if (!isCorrect3 && isCorrect2) {
       setSelectedOption3(option);
-      if (option === "B") {
+      if (option === "C") {
         updateCorrectCount(isCorrect3, setIsCorrect3);
       }
       else {
@@ -133,14 +133,14 @@ const M2 = () => {
         <View style={styles.questionBox}>
           <Text style={styles.questionText}>A company has 2 million shares, and each share is priced at $25. What is the company’s market capitalization?</Text>
           <View style={styles.optionsContainer}>
-            {["A. $25 million ", "B. $50 million ", "C. $2 million ", "D. $75 million"].map((option, index) => (
+            {["A. $50 million ", "B. $25 million ", "C. $2 million ", "D. $75 million"].map((option, index) => (
               <Pressable
                 key={index}
                 onPress={() => handleOptionPress1(option.charAt(0))}
                 style={[
                   styles.optionButton,
                   selectedOption1 === option.charAt(0) && {
-                    backgroundColor: option.charAt(0) === "B" ? Color.colorSeagreen : "red",
+                    backgroundColor: option.charAt(0) === "A" ? Color.colorSeagreen : "red",
                   },
                   isCorrect1 && { opacity: 0.6 },
                 ]}
@@ -149,7 +149,7 @@ const M2 = () => {
               </Pressable>
             ))}
           </View>
-          {(selectedOption1 === "B" || isCorrect1) && (
+          {(selectedOption1 === "A" || isCorrect1) && (
             <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
               Correct! The answer is $50 million.
             </Text>
@@ -224,14 +224,14 @@ const M2 = () => {
           <View style={styles.questionBox}>
             <Text style={styles.questionText}>A company has 1 million shares, and its share price increases from $30 to $35. What happens to the company’s market capitalization?</Text>
             <View style={styles.optionsContainer}>
-              {["A. It decreases from $35 million to $30 million", "B. It increases from $30 million to $35 million", "C. It stays the same", "D. It decreases to $25 million"].map((option, index) => (
+              {["A. It decreases from $35 million to $30 million", "B. It stays the same ", "C. It increases from $30 million to $35 million", "D. It decreases to $25 million"].map((option, index) => (
                 <Pressable
                   key={index}
                   onPress={() => handleOptionPress3(option.charAt(0))}
                   style={[
                     styles.optionButton,
                     selectedOption3 === option.charAt(0) && {
-                      backgroundColor: option.charAt(0) === "B" ? Color.colorSeagreen : "red",
+                      backgroundColor: option.charAt(0) === "C" ? Color.colorSeagreen : "red",
                     },
                     isCorrect3 && { opacity: 0.6 },
                   ]}
@@ -241,7 +241,7 @@ const M2 = () => {
                 </Pressable>
               ))}
             </View>
-            {(selectedOption3 === "B" || isCorrect3) && (
+            {(selectedOption3 === "C" || isCorrect3) && (
               <Text style={{ ...styles.feedbackText, color: Color.colorSeagreen }}>
                 Correct! It increases from $30 million to $35 million.
               </Text>
@@ -337,7 +337,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: Color.colorSeagreen,
     marginBottom: 10,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: "left",
   },
   optionsContainer: {
     width: '100%',
@@ -347,7 +348,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     marginVertical: 5,
-    alignItems: 'center',
+    alignItems: 'left',
   },
   optionText: {
     fontSize: 18,

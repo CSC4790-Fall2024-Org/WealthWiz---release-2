@@ -157,9 +157,8 @@ const M1 = () => {
           
           {(isCorrect1 === false) && (
             <Text style={{ ...styles.feedbackText, color: "red" }}>
-              {"\t"}Incorrect! The correct answer is a stock represents the ownership in a company, and a share is a single unit of that ownership.
-              {"\n\t"}Using our previous example Company X would be a stock as it represents the entire ownership of that company meanwhile a single piece of the ownership
-              in the stock of Company X would be considered a share of Company X
+              {"\t"}Incorrect! 
+              {"\n\t"}Try again!
             </Text>
           )}
         </View>
@@ -207,9 +206,8 @@ const M1 = () => {
 
             {(isCorrect2 === false) && (
               <Text style={{ ...styles.feedbackText, color: "red" }}>
-                {"\t"}Incorrect! The correct answer is a marketplace where investors trade shares of ownership in companies.
-                {"\n\t"}A stock market is accessible to any investor and it is where companies are listed and their shares are made available, for investors, 
-                to purchase
+                {"\t"}Incorrect! 
+              {"\n\t"}Try again!
               </Text>
           )}
           </View>
@@ -257,9 +255,8 @@ const M1 = () => {
 
             {(isCorrect3 === false) && (
               <Text style={{ ...styles.feedbackText, color: "red" }}>
-                {"\t"}Incorrect! The correct answer is a public company offers its stock to the public, while an index tracks the performance of groups of stocks.
-                {"\n\t"}A public company is defined as a company that is listed on the stock market and offers its shares to investors. An index on the other hand
-                is used to track how individual sectors of the market are performing as a whole. 
+                {"\t"}Incorrect! 
+              {"\n\t"}Try again!
               </Text>
           )}
           </View>
@@ -356,7 +353,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     marginVertical: 5,
-    alignItems: 'center',
+    alignItems: 'left',
   },
   optionText: {
     fontSize: 18,

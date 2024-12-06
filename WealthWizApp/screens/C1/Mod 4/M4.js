@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     marginVertical: 5,
-    alignItems: 'center',
+    alignItems: 'left',
   },
   optionText: {
     fontSize: 18,
