@@ -47,8 +47,8 @@ const Register2 = () => {
       setModalVisible(true);
       navigation.navigate("HomePage");
     } catch (error) {
-      //setModalMessage(`Error: ${error.message}`);
-      //setModalVisible(true);
+      setModalMessage(`Error: ${error.message}`);
+      setModalVisible(true);
     }
 
     // try {
