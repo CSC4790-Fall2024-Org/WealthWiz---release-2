@@ -9,10 +9,11 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import FormField from "../components/FormField";
-import { auth } from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import NavBar1 from "../components/NavBar1";
 import {Color} from "../GlobalStyles";
+import { auth, db } from "../firebaseConfig";  // Ensure db is imported
+import { doc, setDoc } from "firebase/firestore";  // Import Firestore functions
 
 const Register2 = () => {
   const navigation = useNavigation();
@@ -31,14 +32,34 @@ const Register2 = () => {
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      // Create user with email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // After user is created, store username in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        username: username,
+        email: email,
+        createdAt: new Date(),
+      });
+
       setModalMessage('Registration successful!');
       setModalVisible(true);
       navigation.navigate("HomePage");
     } catch (error) {
-      setModalMessage(`Error: ${error.message}`);
-      setModalVisible(true);
+      //setModalMessage(`Error: ${error.message}`);
+      //setModalVisible(true);
     }
+
+    // try {
+    //   await createUserWithEmailAndPassword(auth, email, password);
+    //   setModalMessage('Registration successful!');
+    //   setModalVisible(true);
+    //   navigation.navigate("HomePage");
+    // } catch (error) {
+    //   setModalMessage(`Error: ${error.message}`);
+    //   setModalVisible(true);
+    // }
   };
 
   return (
@@ -54,7 +75,7 @@ const Register2 = () => {
           width="80%"
         />
         <FormField
-          placeholder="Email"
+          placeholder="Email*"
           value={email}
           onChangeText={setEmail}
           width="80%"
@@ -123,13 +144,18 @@ const styles = StyleSheet.create({
   modalContainer: {
     width: 300,
     padding: 20,
-    backgroundColor: Color.white,
+    backgroundColor: "rgba(60, 60, 67, 0.6)",
     borderRadius: 10,
     alignItems: "center",
+    borderRadius: 10,
+    borderWidth: 5,
+    borderColor: Color.colorSeagreen
   },
   modalMessage: {
     marginBottom: 20,
     textAlign: "center",
+    color: Color.black0,
+    fontSize: 20,
   },
   modalButton: {
     color: Color.colorBlue,

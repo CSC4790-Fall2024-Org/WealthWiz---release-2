@@ -1,315 +1,234 @@
-import * as React from "react";
-import { Image } from "expo-image";
-import {
-  StyleSheet,
-  StatusBar,
-  View,
-  Text,
-  Pressable,
-  ImageBackground,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import NavBar from "../components/NavBar";
-import {
-  Color,
-  FontFamily,
-  FontSize,
-  Gap,
-  Border,
-  Padding,
-} from "../GlobalStyles";
+import React, { useState, useEffect } from "react";
+import { View, TextInput, Text, FlatList, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../firebaseConfig"; // Make sure to import Firebase auth
+import Menu from "../components/Menu";
+import { FontSize, Color, FontFamily, Border } from "../GlobalStyles";
 
 const ProfilePage = () => {
-  const navigation = useNavigation();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null); // State for current user profile
+
+  // Fetch current user profile from Firestore
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        try {
+          const userDocRef = doc(db, "users", user.uid); // Reference to user's Firestore document
+          const userDoc = await getDoc(userDocRef);
+          
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setCurrentUser({
+              email: user.email,
+              username: userData.username || "No username available", // Fetching username from Firestore
+              profilePicture: user.photoURL || require("../assets/profile.png"), // Fallback profile picture
+            });
+          }
+        } catch (error) {
+          console.error("Error fetching user data from Firestore:", error);
+        }
+      }
+    };
+
+    fetchCurrentUser();
+  }, []);
+
+  const searchUsers = async (queryText) => {
+    if (queryText.trim() === "") {
+      setUsers([]);
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const usersRef = collection(db, "users");
+      const q = query(
+        usersRef,
+        where("email", ">=", queryText),
+        where("email", "<=", queryText + "\uf8ff")
+      );
+      const querySnapshot = await getDocs(q);
+
+      const searchResults = [];
+      querySnapshot.forEach((doc) => {
+        searchResults.push({ id: doc.id, ...doc.data() });
+      });
+
+      setUsers(searchResults);
+    } catch (error) {
+      console.error("Error searching users:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <View style={styles.profilePage}>
-      <Image
-        style={styles.profilePageChild}
-        contentFit="cover"
-        source={require("../assets/vector-3.png")}
-      />
-      <StatusBar style={styles.backgroundIconPosition} translucent={true} />
-      <View style={[styles.lineParent, styles.parentFlexBox]}>
-        <View style={styles.frameChild} />
-        <View style={[styles.frameParent, styles.parentFlexBox]}>
-          <View style={styles.hoursParent}>
-            <Text style={[styles.hours, styles.hoursTypo]}>2+ hours</Text>
-            <Text style={styles.totalLearn}>Total Learn</Text>
-          </View>
-          <View style={styles.frameItem} />
-          <View style={styles.hoursParent}>
-            <Text style={[styles.hours, styles.hoursTypo]}>20</Text>
-            <Text style={styles.totalLearn}>Achivements</Text>
-          </View>
-          <View style={styles.frameItem} />
-          <View style={styles.hoursParent}>
-            <Text style={[styles.hours, styles.hoursTypo]}>2</Text>
-            <Text style={styles.totalLearn}>Completed Courses</Text>
-          </View>
-        </View>
+    <View style={styles.container}>
+      <View style={styles.topPart}>
+        <Text style={styles.home}>Profile</Text>
       </View>
-      <Pressable
-        style={styles.notePencil}
-        onPress={() => navigation.navigate("ProfilePageEdit")}
-      >
-        <Image
-          style={[styles.icon, styles.iconLayout1]}
-          contentFit="cover"
-          source={require("../assets/note-pencil.png")}
-        />
-      </Pressable>
-      <View style={styles.nameusername}>
-        <Text style={[styles.johnDoe, styles.hoursTypo]}>John Doe</Text>
-        <Text style={styles.username}>@username</Text>
+      {/* Current User Profile */}
+      {currentUser && (
+        <View style={styles.currentUserProfile}>
+          <Image
+            source={currentUser.profilePicture}
+            style={styles.profilePicture}
+          />
+          <View>
+            <Text style={styles.username}>{currentUser.username}</Text>
+            <Text style={styles.email}>{currentUser.email}</Text>
+          </View>
+        </View>
+      )}
+
+      {/* Search Input */}
+
+      <View style={styles.middlePart}>
+        <Text style={styles.home}>Search for friends</Text>
       </View>
-      <ImageBackground
-        style={styles.profilePicIcon}
-        resizeMode="cover"
-        source={require("../assets/profilepic.png")}
+
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Search by email..."
+        value={searchQuery}
+        onChangeText={(text) => {
+          setSearchQuery(text);
+          searchUsers(text);
+        }}
       />
-      <Pressable
-        style={[styles.logoutAccount, styles.parentPosition]}
-        onPress={() => navigation.navigate("Login")}
-      >
-        <Text style={styles.logoutAccount1}>Logout Account</Text>
-      </Pressable>
-      <NavBar
-        navBarPosition="absolute"
-        navBarMarginLeft="unset"
-        navBarTop={49}
-        navBarLeft={33}
-        showIcon={false}
+
+      {/* Loading Indicator */}
+      {loading && <Text style={styles.loadingText}>Loading...</Text>}
+
+      {/* Users List */}
+      <FlatList
+        data={users}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.userCard}>
+            <Image
+              source={
+                item.profilePicture
+                  ? { uri: item.profilePicture }
+                  : require("../assets/profile.png") // Fallback profile picture
+              }
+              style={styles.profilePicture}
+            />
+            <View style={styles.userInfo}>
+              <Text style={styles.email}>{item.email}</Text>
+              <Text style={styles.username}>{item.username || "No username available"}</Text>
+            </View>
+          </View>
+        )}
       />
-      <View style={[styles.inputFieldParent, styles.parentPosition]}>
-        <View style={styles.inputField}>
-          <Text style={[styles.email, styles.emailTypo]}>Email</Text>
-          <View style={styles.exampleemailcomWrapper}>
-            <Text style={[styles.exampleemailcom, styles.emailTypo]}>
-              example@email.com
-            </Text>
-          </View>
-        </View>
-        <View style={styles.inputField}>
-          <Text style={[styles.email, styles.emailTypo]}>Age</Text>
-          <View style={styles.exampleemailcomWrapper}>
-            <Text style={[styles.exampleemailcom, styles.emailTypo]}>21</Text>
-          </View>
-        </View>
-        <View style={styles.inputField}>
-          <Text style={[styles.email, styles.emailTypo]}>Phone Number</Text>
-          <View style={styles.exampleemailcomWrapper}>
-            <Text style={[styles.exampleemailcom, styles.emailTypo]}>
-              (xxx)-xxx-xxxx
-            </Text>
-          </View>
-        </View>
-      </View>
+
+      {/* No Results */}
+      {users.length === 0 && !loading && searchQuery.trim() !== "" && (
+        <Text style={styles.noResultsText}>No users found with that email.</Text>
+      )}
+
+      <Menu />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  backgroundIconPosition: {
-    left: 0,
-    top: 0,
-    position: "absolute",
-  },
-  parentFlexBox: {
-    justifyContent: "space-between",
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
     alignItems: "center",
+    paddingTop: "15%",
   },
-  hoursTypo: {
-    textAlign: "center",
-    color: Color.colorDarkslategray_300,
-    fontFamily: FontFamily.extraLargeTextRegular,
-    lineHeight: 26,
+  topPart: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingHorizontal: 40,
   },
-  iconLayout1: {
-    maxHeight: "100%",
-    maxWidth: "100%",
-    overflow: "hidden",
+  home: {
+    fontSize: FontSize.size_13xl,
   },
-  parentPosition: {
-    left: "50%",
-    position: "absolute",
+  middlePart: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingHorizontal: 40,
+    paddingTop: "5%",
+    paddingBottom: "5%",
   },
-  iconLayout2: {
-    height: "100%",
-    width: "100%",
-  },
-  iconLayout: {
-    width: "35.43%",
-    height: "64%",
-    maxHeight: "100%",
-    maxWidth: "100%",
-    position: "absolute",
-    overflow: "hidden",
-  },
-  learn1Typo: {
-    fontFamily: FontFamily.titleCaptionCaption112,
-    lineHeight: 16,
-    textDecoration: "underline",
-    top: "66%",
-    left: "0%",
-    justifyContent: "center",
-    display: "flex",
-    fontSize: FontSize.smallTextRegular_size,
-    textAlign: "center",
-    alignItems: "center",
-    position: "absolute",
-    width: "100%",
-  },
-  learnLayout: {
-    width: "25.06%",
-    height: 50,
-    top: 0,
-    position: "absolute",
-  },
-  emailTypo: {
-    lineHeight: 22,
-    fontSize: FontSize.largeTextMedium_size,
-    textAlign: "center",
-    fontFamily: FontFamily.extraLargeTextRegular,
-  },
-  profilePageChild: {
-    top: -274,
-    left: -296,
-    width: 760,
-    height: 691,
-    position: "absolute",
-  },
-  frameChild: {
-    borderColor: Color.colorGainsboro_400,
-    borderTopWidth: 1,
-    width: 301,
-    height: 1,
-    borderStyle: "solid",
-  },
-  hours: {
-    fontSize: FontSize.extraLargeTextRegular_size,
-    letterSpacing: -1,
-  },
-  totalLearn: {
-    fontSize: FontSize.extraSmallTextRegular_size,
-    lineHeight: 16,
-    color: Color.colorGray_200,
-    textAlign: "center",
-    fontFamily: FontFamily.extraLargeTextRegular,
-  },
-  hoursParent: {
-    gap: Gap.gap_xs,
-    alignItems: "center",
-  },
-  frameItem: {
-    borderColor: Color.colorGainsboro_200,
-    borderRightWidth: 1,
-    width: 1,
-    height: 25,
-    borderStyle: "solid",
-  },
-  frameParent: {
-    width: 296,
+  currentUserProfile: {
     flexDirection: "row",
+    alignItems: "center",
+    padding: 20,
+    borderBottomWidth: 1,
+    borderColor: "#eee",
+    width: "90%",
+    alignSelf: "center",
   },
-  lineParent: {
-    marginLeft: -159.5,
-    top: 241,
-    width: 320,
-    height: 48,
-    left: "50%",
-    position: "absolute",
+  searchInput: {
+    borderWidth: 1,
+    width: "90%",
+    borderColor: "#ccc",
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 20,
+    fontSize: 16,
   },
-  icon: {
-    height: "100%",
-    width: "100%",
+  loadingText: {
+    textAlign: "center",
+    fontSize: 16,
+    color: "#999",
   },
-  notePencil: {
-    left: "80.66%",
-    top: "17.49%",
-    right: "12.98%",
-    bottom: "79.58%",
-    width: "6.36%",
-    height: "2.93%",
-    position: "absolute",
+  userCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    borderBottomWidth: 1,
+    borderColor: "#eee",
+    width: "90%",
+    alignSelf: "center",
+    justifyContent: "space-between",
   },
-  johnDoe: {
-    fontSize: FontSize.doubleExtraLargeTextRegular_size,
-    textShadowColor: "rgba(0, 0, 0, 0.15)",
-    textShadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    textShadowRadius: 20,
+  profilePicture: {
+    width: 50,
+    height: 50,
+    marginRight: 10,
+  },
+  userInfo: {
+    flex: 1,
+    justifyContent: "center",
   },
   username: {
-    lineHeight: 18,
-    fontSize: FontSize.smallTextRegular_size,
-    color: Color.colorGray_200,
-    textAlign: "center",
-    fontFamily: FontFamily.extraLargeTextRegular,
-  },
-  nameusername: {
-    top: 137,
-    left: 136,
-    gap: 6,
-    position: "absolute",
-  },
-  profilePicIcon: {
-    top: 121,
-    left: 43,
-    width: 83,
-    height: 83,
-    borderRadius: Border.br_21xl,
-    position: "absolute",
-  },
-  logoutAccount1: {
-    marginLeft: -67.5,
-    fontSize: FontSize.mediumTextRegular_size,
-    fontWeight: "600",
-    fontFamily: FontFamily.poppins,
-    color: "#fb6d64",
-    height: 28,
-    width: 134,
-    justifyContent: "center",
-    display: "flex",
-    textAlign: "center",
-    alignItems: "center",
-  },
-  logoutAccount: {
-    top: 720,
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#333",
   },
   email: {
-    fontWeight: "500",
-    color: Color.base100,
+    fontSize: 14,
+    color: "#555",
   },
-  exampleemailcom: {
-    letterSpacing: 0,
-    color: Color.base80,
+  noResultsText: {
+    textAlign: "center",
+    fontSize: 16,
+    color: "#999",
   },
-  exampleemailcomWrapper: {
-    width: 327,
-    padding: Padding.p_base,
-    height: 31,
-    borderRadius: Border.br_21xl,
-    flexDirection: "row",
+  addButton: {
+    backgroundColor: "#2FDB81", // Green button color
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    justifyContent: "center",
     alignItems: "center",
   },
-  inputField: {
-    height: 61,
-    gap: Gap.gap_md,
-  },
-  inputFieldParent: {
-    marginLeft: -163.5,
-    top: 317,
-    gap: 10,
-  },
-  profilePage: {
-    backgroundColor: Color.colorGray_100,
-    flex: 1,
-    height: 852,
-    overflow: "hidden",
-    width: "100%",
+  addButtonText: {
+    fontSize: 20,
+    color: "#fff",
+    fontWeight: "bold",
   },
 });
 
